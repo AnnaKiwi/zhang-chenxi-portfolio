@@ -4,6 +4,7 @@ export interface ProjectEvidence {
   caption: string;
   sourceRef: string;
   filename: string;
+  src?: string;
   aspect?: string;
 }
 
@@ -30,6 +31,11 @@ export interface Project {
   featuredOnHome?: boolean;
   primaryImage: string;
   allImages: string[];
+  carouselImages?: {
+    src: string;
+    alt: string;
+    caption?: string;
+  }[];
   videos?: ProjectVideo[];
   metrics?: Metric[];
   overview: string;
@@ -81,7 +87,7 @@ export const PORTFOLIO_DATA = {
     email: 'cx.zhang.2026@mbai.smu.edu.sg',
     linkedinPlaceholder: 'https://linkedin.com/in/zhang-chenxi-placeholder',
     cvUrl: '/cv.pdf',
-    portraitUrl: '/images/portrait.jpg',
+    portraitUrl: 'https://zhang-chenxi-portfolio.vercel.app/portrait/portraitJPG.JPG',
   },
 
   snapshotFigures: [
@@ -279,8 +285,20 @@ export const PORTFOLIO_DATA = {
       categories: ['Brand Strategy', 'Launch Events'],
       level: 'hero',
       featuredOnHome: true,
-      primaryImage: '/images/jinmao-1.jpg',
-      allImages: ['/images/jinmao-1.jpg', '/images/jinmao-2.jpg', '/images/jinmao-3.jpg'],
+      primaryImage: 'https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-01-hero.jpg',
+      allImages: ['https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-01-hero.jpg', 'https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-02-architecture.jpg'],
+      carouselImages: [
+        {
+          src: 'https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-01-hero.jpg',
+          alt: 'Suzhou Jinmao Mansion — Landmark demonstration area and architectural entrance',
+          caption: 'Landmark residential demonstration area & architectural entrance (Suzhou High-tech Zone)',
+        },
+        {
+          src: 'https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-02-architecture.jpg',
+          alt: 'Suzhou Jinmao Mansion — Demonstration area architecture and spatial design specifications',
+          caption: 'Demonstration area architectural view and spatial design specifications',
+        },
+      ],
       metrics: [
         { label: 'Opening Sales', value: 'RMB 820M' },
         { label: 'Market Rank', value: '#1 in Suzhou' },
@@ -299,23 +317,7 @@ export const PORTFOLIO_DATA = {
         'Curated a multi-stage promotion rhythm culminating in a cross-industry Haute Couture Exhibition in collaboration with Xiong Ying (founder of GAIA Legend, guest designer for CCTV Spring Festival Gala). Implemented dynamic digital pattern lights, an immersive courtyard garden tour, and built an independent live-streaming room with 41 live sessions delivering 350,000+ views and 125 qualified client leads.',
       results:
         'Delivered RMB 820 million in opening sales, outperforming market benchmarks. Captured the #1 rank in Suzhou across sales volume, GFA, average price, and gross transaction value. Generated over 5,000 on-site visits and 8 million+ online exposures.',
-      evidence: [
-        {
-          caption: 'Demonstration area architectural view and basic project specifications',
-          sourceRef: 'Portfolio PDF Page 4',
-          filename: 'jinmao-1.jpg',
-        },
-        {
-          caption: 'Product positioning deduction and phased promotion rhythm',
-          sourceRef: 'Portfolio PDF Page 5',
-          filename: 'jinmao-2.jpg',
-        },
-        {
-          caption: 'Haute Couture Exhibition launch and live streaming studio operations',
-          sourceRef: 'Portfolio PDF Page 6 & 13',
-          filename: 'jinmao-3.jpg',
-        },
-      ],
+      evidence: [],
     },
     {
       id: 'shenyang-vanke-yinyue',

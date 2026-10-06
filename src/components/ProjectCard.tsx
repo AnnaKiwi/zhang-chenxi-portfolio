@@ -1,6 +1,7 @@
 import React from 'react';
 import { Project } from '../data/portfolioData';
 import { ProjectImage } from './ProjectImage';
+import { ProjectCarousel } from './ProjectCarousel';
 
 interface ProjectCardProps {
   project: Project;
@@ -22,15 +23,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       {/* Visual Image Representation */}
       <div className={isHero ? 'md:col-span-7' : 'w-full mb-4'}>
-        <ProjectImage
-          src={project.primaryImage}
-          alt={`${project.name} - ${project.company}`}
-          projectName={project.name}
-          chineseName={project.chineseName}
-          sourceRef={project.evidence[0]?.sourceRef}
-          caption={project.evidence[0]?.caption}
-          aspectRatio={isHero ? 'aspect-[16/10]' : 'aspect-[16/11]'}
-        />
+        {project.carouselImages && project.carouselImages.length > 1 ? (
+          <ProjectCarousel
+            images={project.carouselImages}
+            aspectRatio={isHero ? 'aspect-[16/10]' : 'aspect-[16/11]'}
+            onImageClick={() => onOpenDetail(project)}
+          />
+        ) : (
+          <ProjectImage
+            src={project.primaryImage}
+            alt={`${project.name} - ${project.company}`}
+            projectName={project.name}
+            chineseName={project.chineseName}
+            sourceRef={project.evidence[0]?.sourceRef}
+            caption={project.evidence[0]?.caption}
+            aspectRatio={isHero ? 'aspect-[16/10]' : 'aspect-[16/11]'}
+          />
+        )}
       </div>
 
       {/* Content & Metadata */}

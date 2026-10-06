@@ -11,7 +11,6 @@ export const AboutView: React.FC<AboutViewProps> = ({
   onNavigateTab,
   onSelectProject,
 }) => {
-  const [portraitError, setPortraitError] = useState(false);
   const [showLinkedInPlaceholder, setShowLinkedInPlaceholder] = useState(false);
 
   const {
@@ -90,42 +89,11 @@ export const AboutView: React.FC<AboutViewProps> = ({
           <div className="lg:col-span-4 flex flex-col items-center lg:items-end">
             <div className="w-full max-w-xs sm:max-w-sm">
               <div className="aspect-[4/5] bg-[#ECE8DF] border border-[#2B2B2B]/20 rounded-xs overflow-hidden shadow-xs relative">
-                {!portraitError ? (
-                  <img
-                    src={profile.portraitUrl}
-                    alt="Zhang Chenxi — Professional Portrait"
-                    onError={() => setPortraitError(true)}
-                    className="w-full h-full object-cover grayscale contrast-[1.05] hover:grayscale-0 transition-all duration-500"
-                  />
-                ) : (
-                  <div className="w-full h-full p-6 flex flex-col justify-between bg-gradient-to-b from-[#F5F2EB] to-[#EAE5DA] text-[#1F1F1F]">
-                    <div className="flex justify-between items-start">
-                      <span className="text-[11px] tracking-wider uppercase font-bold text-[#0F3D44]">
-                        Portrait Placeholder
-                      </span>
-                      <span className="text-[10px] font-mono text-[#2B2B2B]/60 font-semibold">
-                        4:5 Ratio
-                      </span>
-                    </div>
-
-                    <div className="my-auto text-center space-y-2.5">
-                      <div className="w-14 h-14 mx-auto rounded-full border border-[#2B2B2B]/30 flex items-center justify-center text-[#2B2B2B]/50">
-                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-serif text-lg font-medium text-[#1F1F1F]">Zhang Chenxi</p>
-                        <p className="text-xs text-[#2B2B2B] font-medium mt-0.5">Singapore / China</p>
-                      </div>
-                    </div>
-
-                    <div className="text-[10px] font-mono text-[#2B2B2B]/75 border-t border-[#2B2B2B]/15 pt-2 flex justify-between">
-                      <span>/images/portrait.jpg</span>
-                      <span className="text-[#0F3D44] font-bold">Ready for asset pass</span>
-                    </div>
-                  </div>
-                )}
+                <img
+                  src={profile.portraitUrl}
+                  alt="Zhang Chenxi — Professional Portrait"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.01]"
+                />
               </div>
 
               {/* Verified Status Card */}

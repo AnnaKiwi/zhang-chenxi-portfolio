@@ -25,6 +25,29 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
 }) => {
   const [hasError, setHasError] = useState(false);
   const filename = src.split('/').pop() || src;
+  const isRealAsset =
+    src.startsWith('http://') ||
+    src.startsWith('https://') ||
+    src.startsWith('/jinmao/') ||
+    src.startsWith('/portrait/');
+
+  if (isRealAsset) {
+    return (
+      <div
+        onClick={onClick}
+        className={`relative overflow-hidden bg-[#ECE8DF] border border-[#2B2B2B]/15 rounded-xs transition-all duration-300 group ${aspectRatio} ${className} ${
+          onClick ? 'cursor-pointer hover:border-[#0F3D44]/60' : ''
+        }`}
+      >
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+      </div>
+    );
+  }
 
   return (
     <div

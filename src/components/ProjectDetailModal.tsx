@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Project } from '../data/portfolioData';
 import { ProjectImage } from './ProjectImage';
+import { ProjectCarousel } from './ProjectCarousel';
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -98,15 +99,22 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
           {/* Primary Visual */}
           <div className="border border-[#2B2B2B]/15 rounded-xs overflow-hidden">
-            <ProjectImage
-              src={project.primaryImage}
-              alt={project.name}
-              projectName={project.name}
-              chineseName={project.chineseName}
-              sourceRef={project.evidence[0]?.sourceRef}
-              caption={project.evidence[0]?.caption}
-              aspectRatio="aspect-[16/9]"
-            />
+            {project.carouselImages && project.carouselImages.length > 1 ? (
+              <ProjectCarousel
+                images={project.carouselImages}
+                aspectRatio="aspect-[16/9]"
+              />
+            ) : (
+              <ProjectImage
+                src={project.primaryImage}
+                alt={project.name}
+                projectName={project.name}
+                chineseName={project.chineseName}
+                sourceRef={project.evidence[0]?.sourceRef}
+                caption={project.evidence[0]?.caption}
+                aspectRatio="aspect-[16/9]"
+              />
+            )}
           </div>
 
           {/* Optional Video Evidence (Video-ready architecture, only shown when video assets are present) */}
@@ -223,7 +231,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   {project.evidence.map((item, idx) => (
                     <div key={idx} className="space-y-1.5">
                       <ProjectImage
-                        src={`/images/${item.filename}`}
+                        src={item.src || (item.filename.startsWith('/') ? item.filename : `/images/${item.filename}`)}
                         alt={item.caption}
                         projectName={project.name}
                         sourceRef={item.sourceRef}
