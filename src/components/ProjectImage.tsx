@@ -28,8 +28,12 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
   const isRealAsset =
     src.startsWith('http://') ||
     src.startsWith('https://') ||
+    src.startsWith('/Images/') ||
+    src.startsWith('/images/') ||
     src.startsWith('/jinmao/') ||
-    src.startsWith('/portrait/');
+    src.startsWith('/portrait/') ||
+    src.startsWith('/qingyunque/') ||
+    src.startsWith('/yinyue/');
 
   if (isRealAsset) {
     return (

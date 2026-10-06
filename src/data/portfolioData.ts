@@ -87,7 +87,7 @@ export const PORTFOLIO_DATA = {
     email: 'cx.zhang.2026@mbai.smu.edu.sg',
     linkedinPlaceholder: 'https://linkedin.com/in/zhang-chenxi-placeholder',
     cvUrl: '/cv.pdf',
-    portraitUrl: 'https://zhang-chenxi-portfolio.vercel.app/portrait/portraitJPG.JPG',
+    portraitUrl: '/Images/portrait/portraitJPG.JPG',
   },
 
   snapshotFigures: [
@@ -237,8 +237,20 @@ export const PORTFOLIO_DATA = {
       categories: ['Brand Strategy', 'Content Marketing'],
       level: 'hero',
       featuredOnHome: true,
-      primaryImage: '/images/qingyunque-1.jpg',
-      allImages: ['/images/qingyunque-1.jpg', '/images/qingyunque-2.jpg', '/images/qingyunque-3.jpg'],
+      primaryImage: '/Images/qingyunque/qingyunque-01-hero.jpg',
+      allImages: ['/Images/qingyunque/qingyunque-01-hero.jpg', '/Images/qingyunque/qingyunque-02-architecture.jpg'],
+      carouselImages: [
+        {
+          src: '/Images/qingyunque/qingyunque-01-hero.jpg',
+          alt: 'Longfor Qingyun Que — Flagship low-density demonstration garden and architectural facade',
+          caption: 'Flagship low-density demonstration area and architectural facade (Tianjin Hexi District)',
+        },
+        {
+          src: '/Images/qingyunque/qingyunque-02-architecture.jpg',
+          alt: 'Longfor Qingyun Que — Demonstration area architecture and arrival sanctuary',
+          caption: 'Demonstration area architecture and hotel-style arrival sanctuary',
+        },
+      ],
       metrics: [
         { label: 'Opening-Day Sales', value: 'RMB 1B (2 hrs)' },
         { label: '4-Month Volume', value: 'RMB 2.32B' },
@@ -259,19 +271,10 @@ export const PORTFOLIO_DATA = {
         'Achieved RMB 1 billion in opening sales within two hours of launch. Ranked No. 1 in Tianjin for volume and pricing for three consecutive months. Accumulated RMB 2.32 billion in total sales in 4 months with a 93% sell-through rate and 7,000+ visits.',
       evidence: [
         {
-          caption: 'Demonstration garden architectural facade and rapid delivery milestones',
+          caption: 'Demonstration area architecture and hotel-style arrival sanctuary',
           sourceRef: 'Portfolio PDF Page 10',
-          filename: 'qingyunque-1.jpg',
-        },
-        {
-          caption: 'Customer segmentation analysis, school district positioning and TikTok matrix',
-          sourceRef: 'Portfolio PDF Page 11',
-          filename: 'qingyunque-2.jpg',
-        },
-        {
-          caption: 'Cloud Palace complete VI visual identity and brand collaterals',
-          sourceRef: 'Portfolio PDF Page 12',
-          filename: 'qingyunque-3.jpg',
+          filename: 'qingyunque-02-architecture.jpg',
+          src: '/Images/qingyunque/qingyunque-02-architecture.jpg',
         },
       ],
     },
@@ -285,16 +288,16 @@ export const PORTFOLIO_DATA = {
       categories: ['Brand Strategy', 'Launch Events'],
       level: 'hero',
       featuredOnHome: true,
-      primaryImage: 'https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-01-hero.jpg',
-      allImages: ['https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-01-hero.jpg', 'https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-02-architecture.jpg'],
+      primaryImage: '/Images/jinmao/Jinmao-01-hero.jpg',
+      allImages: ['/Images/jinmao/Jinmao-01-hero.jpg', '/Images/jinmao/Jinmao-02-architecture.jpg'],
       carouselImages: [
         {
-          src: 'https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-01-hero.jpg',
+          src: '/Images/jinmao/Jinmao-01-hero.jpg',
           alt: 'Suzhou Jinmao Mansion — Landmark demonstration area and architectural entrance',
           caption: 'Landmark residential demonstration area & architectural entrance (Suzhou High-tech Zone)',
         },
         {
-          src: 'https://zhang-chenxi-portfolio.vercel.app/jinmao/Jinmao-02-architecture.jpg',
+          src: '/Images/jinmao/Jinmao-02-architecture.jpg',
           alt: 'Suzhou Jinmao Mansion — Demonstration area architecture and spatial design specifications',
           caption: 'Demonstration area architectural view and spatial design specifications',
         },
@@ -317,7 +320,14 @@ export const PORTFOLIO_DATA = {
         'Curated a multi-stage promotion rhythm culminating in a cross-industry Haute Couture Exhibition in collaboration with Xiong Ying (founder of GAIA Legend, guest designer for CCTV Spring Festival Gala). Implemented dynamic digital pattern lights, an immersive courtyard garden tour, and built an independent live-streaming room with 41 live sessions delivering 350,000+ views and 125 qualified client leads.',
       results:
         'Delivered RMB 820 million in opening sales, outperforming market benchmarks. Captured the #1 rank in Suzhou across sales volume, GFA, average price, and gross transaction value. Generated over 5,000 on-site visits and 8 million+ online exposures.',
-      evidence: [],
+      evidence: [
+        {
+          caption: 'Demonstration area architectural view and project specifications',
+          sourceRef: 'Portfolio PDF Page 4',
+          filename: 'Jinmao-02-architecture.jpg',
+          src: '/Images/jinmao/Jinmao-02-architecture.jpg',
+        },
+      ],
     },
     {
       id: 'shenyang-vanke-yinyue',
@@ -329,8 +339,25 @@ export const PORTFOLIO_DATA = {
       categories: ['Brand Strategy', 'Launch Events'],
       level: 'hero',
       featuredOnHome: true,
-      primaryImage: '/images/yinyue-1.jpg',
-      allImages: ['/images/yinyue-1.jpg', '/images/yinyue-2.jpg', '/images/yinyue-3.jpg'],
+      primaryImage: '/Images/yinyue/yinyue-01-hero.jpg',
+      allImages: ['/Images/yinyue/yinyue-01-hero.jpg', '/Images/yinyue/yinyue-02-architecture.jpg', '/Images/yinyue/04-visual-identity.jpg'],
+      carouselImages: [
+        {
+          src: '/Images/yinyue/yinyue-01-hero.jpg',
+          alt: 'Shenyang Vanke Yinyue — Flagship Oriental garden demonstration area and entrance',
+          caption: 'Flagship Oriental garden demonstration area and architectural entrance (Shenyang Huanggu District)',
+        },
+        {
+          src: '/Images/yinyue/yinyue-02-architecture.jpg',
+          alt: 'Shenyang Vanke Yinyue — Demonstration area architecture and ceremonial garden order',
+          caption: 'Demonstration area architecture and ceremonial garden spatial design',
+        },
+        {
+          src: '/Images/yinyue/04-visual-identity.jpg',
+          alt: 'Shenyang Vanke Yinyue — Visual identity system and launch campaign branding',
+          caption: 'Visual identity system, branding and launch event collaterals',
+        },
+      ],
       metrics: [
         { label: 'Live Broadcast Views', value: '2M+' },
         { label: 'On-site Attendees', value: '1,500+' },
@@ -351,19 +378,16 @@ export const PORTFOLIO_DATA = {
         'Over 1,500 attendees gathered on-site; the live broadcast garnered over 2 million views with nearly 60,000 video account views and 1 million+ online exposures, establishing Yinyue as the city\'s flagship launch of the year.',
       evidence: [
         {
-          caption: 'Oriental garden demonstration area and Huanggu district spatial analysis',
+          caption: 'Demonstration area architecture and ceremonial garden spatial design',
           sourceRef: 'Portfolio PDF Page 7',
-          filename: 'yinyue-1.jpg',
+          filename: 'yinyue-02-architecture.jpg',
+          src: '/Images/yinyue/yinyue-02-architecture.jpg',
         },
         {
-          caption: 'Strategic approaches and Chinese real estate evolutionary positioning',
+          caption: 'Visual identity system, branding and launch event collaterals',
           sourceRef: 'Portfolio PDF Page 8',
-          filename: 'yinyue-2.jpg',
-        },
-        {
-          caption: 'Destination-scale ice-screen holographic projection launch spectacle',
-          sourceRef: 'Portfolio PDF Page 14, 15, 17',
-          filename: 'yinyue-3.jpg',
+          filename: '04-visual-identity.jpg',
+          src: '/Images/yinyue/04-visual-identity.jpg',
         },
       ],
     },
