@@ -4,11 +4,14 @@ import { TimelineStop } from '../components/TimelineStop';
 import { CitySkyline } from '../components/CitySkyline';
 
 export const ExperienceView: React.FC = () => {
-  const [activeStopId, setActiveStopId] = useState<string>('stop-1-bologna');
+  const [activeStopId, setActiveStopId] = useState<string>('stop-2-shenyang');
 
-  const stops = PORTFOLIO_DATA.careerTimeline;
+  // Professional progression consists of the 5 work stops (Bologna education is in Education section)
+  const professionalStops = PORTFOLIO_DATA.careerTimeline.filter(
+    (stop) => stop.type === 'Work'
+  );
 
-  const scrollToStop = (id: string) => {
+  const scrollToSection = (id: string) => {
     setActiveStopId(id);
     const el = document.getElementById(id);
     if (el) {
@@ -24,52 +27,66 @@ export const ExperienceView: React.FC = () => {
 
   // Track active stop on scroll
   useEffect(() => {
+    const allTrackedIds = [...professionalStops.map((s) => s.id), 'chapter-singapore'];
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 200;
-      for (let i = stops.length - 1; i >= 0; i--) {
-        const el = document.getElementById(stops[i].id);
+      const scrollPos = window.scrollY + 220;
+      for (let i = allTrackedIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(allTrackedIds[i]);
         if (el && el.offsetTop <= scrollPos) {
-          setActiveStopId(stops[i].id);
+          setActiveStopId(allTrackedIds[i]);
           break;
         }
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [stops]);
+  }, [professionalStops]);
 
   return (
     <div className="space-y-10 sm:space-y-12">
-      {/* Sticky Career Journey Navigator (User Control and Freedom, Nielsen principle) */}
+      {/* Sticky Career Progression Navigator */}
       <div className="sticky top-16 sm:top-18 z-30 bg-[#F7F4EF]/98 backdrop-blur-md border-b border-[#2B2B2B]/15 py-2.5 px-4 sm:px-6 lg:px-10 shadow-xs">
         <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-3 overflow-x-auto no-scrollbar">
           <div className="flex items-center gap-1.5 shrink-0">
             <span className="text-[11px] font-mono uppercase tracking-wider font-bold text-[#0F3D44] mr-1 hidden sm:inline">
-              Journey:
+              Progression:
             </span>
-            {stops.map((stop) => {
+            {professionalStops.map((stop, idx) => {
               const isCurrent = activeStopId === stop.id;
-              const shortCity = stop.city.split(',')[0].replace(' / Northeast China', '');
+              const shortCity = stop.city === 'Shenyang / Northeast China' ? 'Northeast China' : stop.city.split(',')[0];
               return (
                 <button
                   key={stop.id}
-                  onClick={() => scrollToStop(stop.id)}
-                  className={`px-2.5 py-1 text-xs font-medium rounded-xs transition-colors shrink-0 cursor-pointer ${
+                  onClick={() => scrollToSection(stop.id)}
+                  className={`px-2.5 py-1 text-xs font-semibold rounded-xs transition-colors shrink-0 cursor-pointer ${
                     isCurrent
                       ? 'bg-[#0F3D44] text-[#F7F4EF] font-bold shadow-xs'
                       : 'text-[#1F1F1F] hover:bg-[#2B2B2B]/10 hover:text-[#0F3D44]'
                   }`}
                 >
-                  {shortCity}
+                  0{idx + 1} {shortCity}
                 </button>
               );
             })}
+
+            {/* Singapore Next Chapter Quick Link */}
+            <span className="text-[#2B2B2B]/30 mx-1 hidden sm:inline">|</span>
+            <button
+              onClick={() => scrollToSection('chapter-singapore')}
+              className={`px-2.5 py-1 text-xs font-semibold rounded-xs transition-colors shrink-0 cursor-pointer ${
+                activeStopId === 'chapter-singapore'
+                  ? 'bg-[#0F3D44] text-[#F7F4EF] font-bold shadow-xs'
+                  : 'text-[#0F3D44] hover:bg-[#0F3D44]/10 font-bold'
+              }`}
+            >
+              Next Chapter: Singapore
+            </button>
           </div>
 
           {/* Quick Return to Overview */}
           <button
             onClick={scrollToTop}
-            className="text-xs font-semibold text-[#0F3D44] hover:underline flex items-center gap-1 shrink-0 px-2 py-1 cursor-pointer"
+            className="text-xs font-bold text-[#0F3D44] hover:underline flex items-center gap-1 shrink-0 px-2 py-1 cursor-pointer"
           >
             <span>Overview ↑</span>
           </button>
@@ -77,12 +94,12 @@ export const ExperienceView: React.FC = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 space-y-10">
-        {/* Simplified Page Title & Header */}
+        {/* Page Title & Header */}
         <div id="timeline-overview" className="space-y-3">
           <div className="flex items-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0F3D44]">
             <span className="font-mono">02</span>
             <span aria-hidden="true" className="text-[#2B2B2B]/40">/</span>
-            <span>Career Milestones</span>
+            <span>Professional Milestones</span>
           </div>
 
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#1F1F1F] tracking-tight leading-[1.08]">
@@ -90,22 +107,22 @@ export const ExperienceView: React.FC = () => {
           </h1>
 
           <p className="text-sm sm:text-base text-[#1F1F1F] font-normal max-w-3xl leading-relaxed">
-            The 9-year progression moving across Bologna → Shenyang → Zhengzhou → Tianjin & Beijing → Suzhou → Northeast China → Singapore.
+            A 9-year progression in corporate brand, go-to-market and marketing governance across Shenyang → Zhengzhou → Tianjin & Beijing → Suzhou → Northeast China, leading into Business AI in Singapore.
           </p>
 
-          {/* Legend: Education vs Work */}
-          <div className="pt-3 flex flex-wrap items-center gap-5 text-xs text-[#2B2B2B] border-t border-[#2B2B2B]/12">
+          {/* Track Record & Strategic Scope */}
+          <div className="pt-3 flex flex-wrap items-center gap-4 text-xs text-[#2B2B2B] border-t border-[#2B2B2B]/12">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full border-2 border-[#E8A598] bg-[#E8A598]/20" />
-              <span className="font-medium">Education Stops</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#0F3D44]" />
+              <span className="font-bold text-[#1F1F1F]">Professional Marketing Progression</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full border-2 border-[#0F3D44] bg-[#0F3D44]/20" />
-              <span className="font-medium">Corporate Leadership & Governance</span>
-            </div>
+            <span className="text-[#2B2B2B]/40 hidden sm:inline">|</span>
+            <span className="font-semibold text-[#1F1F1F]">
+              4 Fortune Global 500 Developers · RMB 22B+ Sales Supported (2024–2025)
+            </span>
             <span className="text-[#2B2B2B]/40 hidden md:inline">|</span>
-            <span className="text-[#2B2B2B]/80 italic">
-              Capability labels are narrative chapter themes, not formal job titles.
+            <span className="text-[#2B2B2B] font-medium">
+              Chapter labels describe strategic capability phases.
             </span>
           </div>
         </div>
@@ -114,40 +131,40 @@ export const ExperienceView: React.FC = () => {
         <div className="bg-[#EAE5DA]/55 border border-[#2B2B2B]/15 p-4 sm:p-5 rounded-xs">
           <div className="flex items-center justify-between mb-3 text-xs font-mono text-[#0F3D44]">
             <span className="font-bold uppercase tracking-wider">
-              7 Geographic Stops
+              5 Professional Milestones
             </span>
-            <span className="font-medium text-[#2B2B2B]">
-              2014 – 2027
+            <span className="font-bold text-[#1F1F1F]">
+              2017 – 2026 · 9-Year Track Record
             </span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
-            {stops.map((stop, idx) => {
-              const isEducation = stop.type === 'Education';
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+            {professionalStops.map((stop, idx) => {
               const isSelected = activeStopId === stop.id;
+              const displayCity = stop.city === 'Shenyang / Northeast China' ? 'Northeast China' : stop.city.split(',')[0];
 
               return (
                 <button
                   key={stop.id}
-                  onClick={() => scrollToStop(stop.id)}
-                  className={`text-left p-2.5 rounded-xs border transition-all cursor-pointer ${
+                  onClick={() => scrollToSection(stop.id)}
+                  className={`text-left p-3 rounded-xs border transition-all cursor-pointer ${
                     isSelected
                       ? 'bg-[#0F3D44] text-[#F7F4EF] border-[#0F3D44] shadow-xs'
-                      : 'bg-white/70 hover:bg-white text-[#1F1F1F] border-[#2B2B2B]/12'
+                      : 'bg-white/80 hover:bg-white text-[#1F1F1F] border-[#2B2B2B]/15'
                   }`}
                 >
-                  <div className="flex items-center justify-between text-[10px] font-mono mb-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono mb-1.5">
                     <span className={isSelected ? 'text-[#E8A598] font-bold' : 'text-[#0F3D44] font-bold'}>
                       0{idx + 1}
                     </span>
-                    <span className={isEducation ? 'text-[#E8A598] font-bold' : 'font-semibold opacity-75'}>
-                      {stop.type}
+                    <span className="font-bold uppercase tracking-wider text-[10px] opacity-80">
+                      {stop.years.split('–')[0].trim().split(' ')[1] || stop.years.split('–')[0]}
                     </span>
                   </div>
-                  <div className="font-serif font-medium text-sm truncate">
-                    {stop.city.split(',')[0]}
+                  <div className="font-serif font-bold text-base truncate">
+                    {displayCity}
                   </div>
-                  <div className={`text-[10px] truncate mt-0.5 ${isSelected ? 'text-[#F7F4EF]/85' : 'text-[#2B2B2B]/75'}`}>
+                  <div className={`text-[11px] truncate mt-1 font-medium ${isSelected ? 'text-[#F7F4EF]/90' : 'text-[#2B2B2B]'}`}>
                     {stop.narrativeLabel}
                   </div>
                 </button>
@@ -156,27 +173,99 @@ export const ExperienceView: React.FC = () => {
           </div>
         </div>
 
-        {/* Timeline Stops */}
+        {/* 5 Professional Progression Timeline Stops */}
         <div className="space-y-1">
-          {stops.map((stop, index) => (
+          {professionalStops.map((stop, index) => (
             <div key={stop.id} id={stop.id} className="scroll-mt-36">
               <TimelineStop
                 stop={stop}
                 index={index}
-                total={stops.length}
+                total={professionalStops.length}
               />
             </div>
           ))}
         </div>
 
+        {/* NEXT CHAPTER · SINGAPORE (Separate Transition into Business AI) */}
+        <section id="chapter-singapore" className="scroll-mt-36 pt-4">
+          <div className="relative p-6 sm:p-8 bg-[#0F3D44]/6 border-2 border-[#0F3D44]/35 rounded-xs space-y-6">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#0F3D44]/20 pb-4">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold block mb-1">
+                  Next Chapter · Singapore
+                </span>
+                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1F1F1F]">
+                  Business AI
+                </h2>
+              </div>
+              <div className="sm:text-right">
+                <span className="font-mono text-xs text-[#0F3D44] font-bold tracking-wider block">
+                  Aug 2026 – Aug 2027
+                </span>
+                <span className="text-[11px] font-sans uppercase tracking-wider text-[#2B2B2B] font-bold">
+                  Strategic & Academic Transition
+                </span>
+              </div>
+            </div>
+
+            {/* Strategic Narrative */}
+            <p className="font-serif text-lg sm:text-xl text-[#1F1F1F] font-normal leading-relaxed max-w-3xl">
+              Communicates the transition from nine years of brand leadership and corporate marketing governance at four Fortune Global 500 developers into quantitative, data-driven Business AI at Singapore Management University — applying artificial intelligence to marketing analytics, consumer decision-making, and high-involvement purchasing.
+            </p>
+
+            {/* Details Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
+              <div className="p-5 bg-white/85 border border-[#2B2B2B]/15 rounded-xs space-y-2.5">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
+                  Institution & Degree
+                </span>
+                <h3 className="font-serif text-xl font-bold text-[#1F1F1F]">
+                  Singapore Management University
+                </h3>
+                <p className="text-xs font-bold text-[#0F3D44]">
+                  Lee Kong Chian School of Business
+                </p>
+                <p className="text-sm font-semibold text-[#1F1F1F]">
+                  Master of Science in Business AI candidate
+                </p>
+                <div className="pt-2.5 border-t border-[#2B2B2B]/10 text-xs text-[#2B2B2B] space-y-1.5">
+                  <p className="font-medium">
+                    <strong className="text-[#0F3D44] font-bold">Scholarship:</strong> Awarded prestigious Community Impact Scholarship.
+                  </p>
+                  <p className="font-medium">
+                    <strong className="text-[#0F3D44] font-bold">Availability:</strong> Full-time internship starting January 2027 in Singapore.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-5 bg-white/85 border border-[#2B2B2B]/15 rounded-xs space-y-2.5">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
+                  Core Coursework & Research
+                </span>
+                <ul className="text-xs text-[#1F1F1F] space-y-2 leading-relaxed pt-1">
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0F3D44] mt-1.5 shrink-0" />
+                    <span><strong className="font-bold">Coursework:</strong> AI-Powered Marketing, Human-AI Collaboration, Data-Driven Decision Making with AI, Data Storytelling and AI-augmented Influencing.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0F3D44] mt-1.5 shrink-0" />
+                    <span><strong className="font-bold">Academic Research:</strong> Empirical study on AI-generated influencers in consumer and high-involvement purchasing decisions (accepted at APMA & CMIC 2026).</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Contextual Back to Top Action at End of Journey */}
-        <div className="pt-4 pb-2 border-t border-[#2B2B2B]/15 flex justify-between items-center text-xs font-semibold">
-          <span className="text-[#2B2B2B]/75 font-mono">End of Career Journey (2014–2027)</span>
+        <div className="pt-4 pb-2 border-t border-[#2B2B2B]/15 flex justify-between items-center text-xs font-bold">
+          <span className="text-[#2B2B2B] font-mono">End of Professional Progression (2017–2027)</span>
           <button
             onClick={scrollToTop}
             className="px-4 py-2 border border-[#0F3D44] text-[#0F3D44] hover:bg-[#0F3D44] hover:text-[#F7F4EF] rounded-xs transition-colors flex items-center gap-1.5 cursor-pointer uppercase tracking-wider"
           >
-            <span>Timeline Overview ↑</span>
+            <span>Overview ↑</span>
           </button>
         </div>
 

@@ -231,7 +231,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   {project.evidence.map((item, idx) => (
                     <div key={idx} className="space-y-1.5">
                       <ProjectImage
-                        src={item.src || (item.filename.startsWith('/') ? item.filename : `/images/${item.filename}`)}
+                        src={item.src || (item.filename.startsWith('/') ? item.filename : `/Images/${item.filename}`)}
                         alt={item.caption}
                         projectName={project.name}
                         sourceRef={item.sourceRef}

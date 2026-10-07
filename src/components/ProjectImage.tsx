@@ -130,7 +130,7 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
 
           {/* Bottom filename info */}
           <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-[#2B2B2B] border-t border-[#2B2B2B]/15 pt-1.5 font-medium">
-            <span>/images/{filename}</span>
+            <span>/Images/{filename}</span>
             <span className="text-[#0F3D44] font-bold">Ready for asset pass</span>
           </div>
         </div>

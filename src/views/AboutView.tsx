@@ -36,16 +36,14 @@ export const AboutView: React.FC<AboutViewProps> = ({
             <div className="flex flex-wrap items-center gap-2.5 text-xs tracking-widest uppercase font-bold text-[#0F3D44]">
               <span>Singapore</span>
               <span aria-hidden="true" className="text-[#2B2B2B]/40">·</span>
-              <span>SMU Lee Kong Chian School of Business</span>
-              <span aria-hidden="true" className="text-[#2B2B2B]/40">·</span>
-              <span className="font-mono text-[#0F3D44]">2026–2027</span>
+              <span>Singapore Management University</span>
             </div>
 
             <div className="space-y-2">
               <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight text-[#1F1F1F] leading-[1.08]">
                 {profile.name}
               </h1>
-              <p className="text-sm sm:text-base font-sans font-semibold tracking-wide text-[#0F3D44] uppercase">
+              <p className="text-sm sm:text-base font-sans font-bold tracking-wide text-[#0F3D44] uppercase">
                 Brand & Marketing Strategist · MSc in Business AI Candidate
               </p>
             </div>
@@ -57,30 +55,30 @@ export const AboutView: React.FC<AboutViewProps> = ({
               </p>
             </div>
 
-            {/* Quick Exploration Buttons */}
+            {/* Quick Exploration Buttons (Coherent button system) */}
             <div className="pt-1 flex flex-wrap items-center gap-3 text-xs font-bold tracking-wider uppercase">
               <button
                 onClick={() => onNavigateTab('work')}
-                className="px-5 py-2.5 bg-[#0F3D44] text-[#F7F4EF] hover:bg-[#0F3D44]/90 transition-all rounded-xs shadow-xs flex items-center gap-2 cursor-pointer"
+                className="px-5 py-2.5 bg-[#0F3D44] text-[#F7F4EF] hover:bg-[#0F3D44]/90 transition-all rounded-xs shadow-xs flex items-center gap-2 cursor-pointer font-bold tracking-wider uppercase"
               >
                 <span>Selected Work</span>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <span aria-hidden="true">→</span>
               </button>
 
               <button
                 onClick={() => onNavigateTab('experience')}
-                className="px-5 py-2.5 border border-[#2B2B2B]/35 text-[#1F1F1F] hover:border-[#0F3D44] hover:text-[#0F3D44] transition-all rounded-xs cursor-pointer font-semibold"
+                className="px-5 py-2.5 border border-[#2B2B2B]/35 hover:border-[#0F3D44] text-[#1F1F1F] hover:text-[#0F3D44] bg-white/70 hover:bg-[#0F3D44]/5 transition-all rounded-xs shadow-xs flex items-center gap-2 cursor-pointer font-bold tracking-wider uppercase"
               >
-                Career Journey
+                <span>Career Journey</span>
+                <span aria-hidden="true">→</span>
               </button>
 
               <button
                 onClick={() => onNavigateTab('ai-skills')}
-                className="px-5 py-2.5 border border-transparent text-[#0F3D44] hover:bg-[#0F3D44]/10 transition-all rounded-xs cursor-pointer font-semibold"
+                className="px-5 py-2.5 border border-[#2B2B2B]/35 hover:border-[#0F3D44] text-[#1F1F1F] hover:text-[#0F3D44] bg-white/70 hover:bg-[#0F3D44]/5 transition-all rounded-xs shadow-xs flex items-center gap-2 cursor-pointer font-bold tracking-wider uppercase"
               >
-                AI & Skills →
+                <span>AI & Skills</span>
+                <span aria-hidden="true">→</span>
               </button>
             </div>
           </div>
@@ -125,21 +123,90 @@ export const AboutView: React.FC<AboutViewProps> = ({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-5">
-          {snapshotFigures.map((fig, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col justify-between border-l-2 border-[#0F3D44]/30 pl-4 py-1"
-            >
-              <div>
-                <span className="font-serif text-3xl sm:text-4xl lg:text-3xl font-medium text-[#1F1F1F] tracking-tight block">
-                  {fig.metric}
+          {/* Metric 1: 9 Years */}
+          <div className="flex flex-col justify-between border-l-2 border-[#0F3D44] pl-4 py-1">
+            <div>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-serif text-4xl sm:text-5xl font-bold text-[#1F1F1F] tracking-tight leading-none">
+                  9
                 </span>
-                <p className="text-xs sm:text-sm text-[#2B2B2B] mt-1.5 font-normal leading-relaxed">
-                  {fig.detail}
-                </p>
+                <span className="text-xs font-sans font-bold text-[#0F3D44] uppercase tracking-wider">
+                  Years
+                </span>
               </div>
+              <p className="text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-wider text-[#2B2B2B] mt-2.5 leading-snug">
+                IN BRAND & MARKETING STRATEGY
+              </p>
             </div>
-          ))}
+          </div>
+
+          {/* Metric 2: 4 Fortune Global 500 */}
+          <div className="flex flex-col justify-between border-l-2 border-[#0F3D44] pl-4 py-1">
+            <div>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-serif text-4xl sm:text-5xl font-bold text-[#1F1F1F] tracking-tight leading-none">
+                  4
+                </span>
+                <span className="text-xs font-sans font-bold text-[#0F3D44] uppercase tracking-wider">
+                  Fortune 500
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-wider text-[#2B2B2B] mt-2.5 leading-snug">
+                DEVELOPERS: VANKE, CHINA JINMAO, LONGFOR, SUNAC
+              </p>
+            </div>
+          </div>
+
+          {/* Metric 3: 41 Projects */}
+          <div className="flex flex-col justify-between border-l-2 border-[#0F3D44] pl-4 py-1">
+            <div>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-serif text-4xl sm:text-5xl font-bold text-[#1F1F1F] tracking-tight leading-none">
+                  41
+                </span>
+                <span className="text-xs font-sans font-bold text-[#0F3D44] uppercase tracking-wider">
+                  Projects
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-wider text-[#2B2B2B] mt-2.5 leading-snug">
+                UNDER REGIONAL BRAND GOVERNANCE
+              </p>
+            </div>
+          </div>
+
+          {/* Metric 4: RMB 22B+ */}
+          <div className="flex flex-col justify-between border-l-2 border-[#0F3D44] pl-4 py-1">
+            <div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-xs sm:text-sm font-mono font-bold text-[#0F3D44] uppercase tracking-wider">
+                  RMB
+                </span>
+                <span className="font-serif text-4xl sm:text-5xl font-bold text-[#1F1F1F] tracking-tight leading-none">
+                  22B+
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-wider text-[#2B2B2B] mt-2.5 leading-snug">
+                IN SALES SUPPORTED (2024–2025)
+              </p>
+            </div>
+          </div>
+
+          {/* Metric 5: RMB 1B */}
+          <div className="flex flex-col justify-between border-l-2 border-[#0F3D44] pl-4 py-1">
+            <div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-xs sm:text-sm font-mono font-bold text-[#0F3D44] uppercase tracking-wider">
+                  RMB
+                </span>
+                <span className="font-serif text-4xl sm:text-5xl font-bold text-[#1F1F1F] tracking-tight leading-none">
+                  1B
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-wider text-[#2B2B2B] mt-2.5 leading-snug">
+                OPENING-DAY SALES (QINGYUN QUE LAUNCH)
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -158,98 +225,122 @@ export const AboutView: React.FC<AboutViewProps> = ({
         </div>
       </section>
 
-      {/* SECTION E: CREDENTIALS (SMU, BOLOGNA, ANSHAN, LANGUAGES, WORK AUTHORIZATION) */}
+      {/* SECTION E: EDUCATION (ONLY THE THREE ACADEMIC INSTITUTIONS) */}
       <section className="space-y-6">
         <div className="flex items-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0F3D44] mb-2">
           <span className="font-mono">03</span>
           <span aria-hidden="true" className="text-[#2B2B2B]/40">/</span>
-          <span>Education & Credentials</span>
+          <span>Education</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Education: SMU */}
-          <div className="p-5 bg-white/60 border border-[#2B2B2B]/15 rounded-xs space-y-2.5">
+          <div className="p-5 sm:p-6 bg-white/70 border border-[#2B2B2B]/20 rounded-xs space-y-3">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
               Current Education · Singapore
             </span>
-            <h3 className="font-serif text-lg font-medium text-[#1F1F1F] leading-tight">
+            <h3 className="font-serif text-xl font-bold text-[#1F1F1F] leading-tight">
               Singapore Management University
             </h3>
-            <p className="text-xs font-semibold text-[#0F3D44]">
+            <p className="text-sm font-bold text-[#0F3D44]">
               Master of Science in Business AI
             </p>
-            <p className="text-xs text-[#2B2B2B]/90 font-mono">
+            <p className="text-xs text-[#2B2B2B] font-mono font-semibold">
               Aug 2026 – Aug 2027
             </p>
-            <p className="text-xs text-[#2B2B2B] pt-1 border-t border-[#2B2B2B]/10">
+            <p className="text-xs text-[#2B2B2B] pt-2 border-t border-[#2B2B2B]/10 leading-relaxed font-normal">
               Awarded Community Impact scholarship. Coursework: AI-Powered Marketing, Human-AI Collaboration, Data-Driven Decision Making.
             </p>
           </div>
 
           {/* Education: Bologna */}
-          <div className="p-5 bg-white/60 border border-[#2B2B2B]/15 rounded-xs space-y-2.5">
+          <div className="p-5 sm:p-6 bg-white/70 border border-[#2B2B2B]/20 rounded-xs space-y-3">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
               Graduate Degree · Italy
             </span>
-            <h3 className="font-serif text-lg font-medium text-[#1F1F1F] leading-tight">
+            <h3 className="font-serif text-xl font-bold text-[#1F1F1F] leading-tight">
               Accademia di Belle Arti di Bologna
             </h3>
-            <p className="text-xs font-semibold text-[#0F3D44]">
+            <p className="text-sm font-bold text-[#0F3D44]">
               MFA in Scenography & Staging
             </p>
-            <p className="text-xs text-[#2B2B2B]/90 font-mono">
+            <p className="text-xs text-[#2B2B2B] font-mono font-semibold">
               Oct 2014 – Feb 2017
             </p>
-            <p className="text-xs text-[#2B2B2B] pt-1 border-t border-[#2B2B2B]/10">
+            <p className="text-xs text-[#2B2B2B] pt-2 border-t border-[#2B2B2B]/10 leading-relaxed font-normal">
               Foundation in spatial storytelling, scenography, lighting, and architectural staging.
             </p>
           </div>
 
           {/* Earlier Education: Anshan Normal */}
-          <div className="p-5 bg-white/60 border border-[#2B2B2B]/15 rounded-xs space-y-2.5">
+          <div className="p-5 sm:p-6 bg-white/70 border border-[#2B2B2B]/20 rounded-xs space-y-3">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
               Undergraduate Degree · China
             </span>
-            <h3 className="font-serif text-lg font-medium text-[#1F1F1F] leading-tight">
+            <h3 className="font-serif text-xl font-bold text-[#1F1F1F] leading-tight">
               {earlierEducation.institution}
             </h3>
-            <p className="text-xs font-semibold text-[#0F3D44]">
+            <p className="text-sm font-bold text-[#0F3D44]">
               {earlierEducation.degree}
             </p>
-            <p className="text-xs text-[#2B2B2B]/90 font-mono">
+            <p className="text-xs text-[#2B2B2B] font-mono font-semibold">
               {earlierEducation.years}
             </p>
-            <p className="text-xs text-[#2B2B2B] pt-1 border-t border-[#2B2B2B]/10">
+            <p className="text-xs text-[#2B2B2B] pt-2 border-t border-[#2B2B2B]/10 leading-relaxed font-normal">
               Foundational art, spatial and visual design training.
             </p>
           </div>
+        </div>
 
-          {/* Languages & Work Authorization */}
-          <div className="p-5 bg-white/60 border border-[#2B2B2B]/15 rounded-xs space-y-3">
-            <div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block mb-1">
+        {/* CREDENTIALS & ADDITIONAL INFORMATION (Separate Section Below the 3 Education Cards) */}
+        <div className="mt-8 pt-6 border-t border-[#2B2B2B]/15 space-y-4">
+          <div className="flex items-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0F3D44]">
+            <span className="font-mono">03.1</span>
+            <span aria-hidden="true" className="text-[#2B2B2B]/40">/</span>
+            <span>Credentials & Additional Information</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Languages Card */}
+            <div className="p-5 sm:p-6 bg-[#ECE8DF]/60 border border-[#2B2B2B]/20 rounded-xs space-y-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
                 Languages
               </span>
-              <ul className="text-xs space-y-1">
+              <ul className="text-xs divide-y divide-[#2B2B2B]/10">
                 {languages.map((l, i) => (
-                  <li key={i} className="flex justify-between text-[#1F1F1F]">
-                    <span className="font-medium">{l.language}</span>
-                    <span className="font-mono text-[#2B2B2B]/80">{l.proficiency}</span>
+                  <li key={i} className="py-2.5 flex justify-between items-center text-[#1F1F1F]">
+                    <span className="font-bold text-sm">{l.language}</span>
+                    <span className="font-mono font-bold text-xs text-[#0F3D44]">{l.proficiency}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="pt-2.5 border-t border-[#2B2B2B]/10">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block mb-1">
+            {/* Work Authorization Card */}
+            <div className="p-5 sm:p-6 bg-[#ECE8DF]/60 border border-[#2B2B2B]/20 rounded-xs space-y-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
                 Work Authorization
               </span>
-              <p className="text-xs text-[#1F1F1F]">
-                <strong className="text-[#0F3D44]">Singapore:</strong> {workAuthorization.singapore}
-              </p>
-              <p className="text-xs text-[#1F1F1F] mt-0.5">
-                <strong className="text-[#0F3D44]">China:</strong> {workAuthorization.china}
-              </p>
+              <div className="space-y-3 text-xs">
+                <div className="p-3 bg-white/70 border border-[#2B2B2B]/15 rounded-xs">
+                  <div className="flex justify-between items-baseline mb-1">
+                    <strong className="text-sm font-bold text-[#1F1F1F]">Singapore</strong>
+                    <span className="font-mono font-bold text-[11px] text-[#0F3D44] uppercase tracking-wider">Internship</span>
+                  </div>
+                  <p className="text-[#2B2B2B] leading-relaxed">
+                    {workAuthorization.singapore}
+                  </p>
+                </div>
+                <div className="p-3 bg-white/70 border border-[#2B2B2B]/15 rounded-xs">
+                  <div className="flex justify-between items-baseline mb-1">
+                    <strong className="text-sm font-bold text-[#1F1F1F]">China</strong>
+                    <span className="font-mono font-bold text-[11px] text-[#0F3D44] uppercase tracking-wider">Citizen</span>
+                  </div>
+                  <p className="text-[#2B2B2B] leading-relaxed">
+                    Permanent citizen work rights
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -339,8 +430,8 @@ export const AboutView: React.FC<AboutViewProps> = ({
             <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold block mb-1">
               Direct Inquiries
             </span>
-            <h3 className="font-serif text-2xl font-medium text-[#1F1F1F]">
-              Contact Zhang Chenxi
+            <h3 className="font-serif text-2xl font-bold text-[#1F1F1F]">
+              Contact me
             </h3>
             <p className="text-xs text-[#2B2B2B] mt-1">
               Available for full-time internship starting January 2027 in Singapore.

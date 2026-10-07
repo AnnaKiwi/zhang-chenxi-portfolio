@@ -47,29 +47,29 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <div>
           {/* Metadata Row: Category, City, Year (clean text with typographic separators, NO pills) */}
           <div className="flex flex-wrap items-center gap-x-2 text-xs text-[#2B2B2B] font-sans mb-2.5">
-            <span className="font-semibold text-[#0F3D44]">
+            <span className="font-bold text-[#0F3D44] uppercase tracking-wider">
               {project.categories.join(' · ')}
             </span>
             <span aria-hidden="true" className="text-[#2B2B2B]/40 font-bold">/</span>
-            <span className="font-medium text-[#2B2B2B]">{project.city}</span>
+            <span className="font-semibold text-[#1F1F1F]">{project.city}</span>
             <span aria-hidden="true" className="text-[#2B2B2B]/40 font-bold">/</span>
-            <span className="font-mono text-[#2B2B2B]/80 font-medium">{project.year}</span>
+            <span className="font-mono text-[#1F1F1F] font-bold">{project.year}</span>
           </div>
 
           {/* Titles */}
           <div className="mb-2.5">
-            <h3 className="font-serif text-2xl sm:text-3xl font-medium text-[#1F1F1F] group-hover:text-[#0F3D44] transition-colors leading-tight">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1F1F1F] group-hover:text-[#0F3D44] transition-colors leading-tight">
               {project.name}
             </h3>
             {project.chineseName && (
-              <span className="font-serif text-base sm:text-lg text-[#2B2B2B]/75 font-normal block mt-0.5">
+              <span className="font-serif text-base sm:text-lg text-[#2B2B2B] font-medium block mt-0.5">
                 {project.chineseName}
               </span>
             )}
           </div>
 
           {/* Company Kicker */}
-          <p className="text-xs uppercase tracking-wider text-[#0F3D44] font-semibold mb-2.5">
+          <p className="text-xs uppercase tracking-wider text-[#0F3D44] font-bold mb-2.5">
             {project.company}
           </p>
 
@@ -80,13 +80,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
           {/* Metrics preview if available */}
           {project.metrics && project.metrics.length > 0 && (
-            <div className="grid grid-cols-2 gap-3 pt-3 border-t border-[#2B2B2B]/12 mb-4">
+            <div className="grid grid-cols-2 gap-3 pt-3 border-t border-[#2B2B2B]/15 mb-4">
               {project.metrics.slice(0, 2).map((m, idx) => (
                 <div key={idx}>
-                  <span className="block text-base font-serif font-bold text-[#0F3D44]">
+                  <span className="block text-lg font-serif font-bold text-[#0F3D44]">
                     {m.value}
                   </span>
-                  <span className="block text-[11px] text-[#2B2B2B]/85 font-medium tracking-tight">
+                  <span className="block text-[11px] text-[#2B2B2B] font-semibold uppercase tracking-wider">
                     {m.label}
                   </span>
                 </div>
@@ -96,7 +96,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* View Case Study Link */}
-        <div className="pt-2 flex items-center text-xs tracking-wider uppercase font-semibold text-[#0F3D44] group-hover:translate-x-1 transition-transform">
+        <div className="pt-2 flex items-center text-xs tracking-wider uppercase font-bold text-[#0F3D44] group-hover:translate-x-1 transition-transform">
           <span>Explore Case Study</span>
           <svg className="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

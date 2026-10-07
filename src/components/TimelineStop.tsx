@@ -54,48 +54,44 @@ export const TimelineStop: React.FC<TimelineStopProps> = ({
         <div className="flex-grow bg-[#F7F4EF] border border-[#2B2B2B]/15 rounded-xs p-5 sm:p-7 hover:border-[#0F3D44]/50 hover:shadow-xs transition-all">
           {/* Header Row: City, Years, Type indicator */}
           <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1.5">
-            <div className="flex items-center gap-2">
-              <span className="font-serif text-2xl font-medium text-[#1F1F1F]">
+            <div className="flex items-center gap-2.5">
+              <span className="font-serif text-2xl font-bold text-[#1F1F1F]">
                 {stop.city}
               </span>
-              <span className={`text-xs uppercase tracking-wider font-mono font-bold px-2 py-0.5 border rounded-xs ${
-                isEducation
-                  ? 'bg-[#E8A598]/20 text-[#0F3D44] border-[#E8A598]/40'
-                  : 'bg-[#0F3D44]/10 text-[#0F3D44] border-[#0F3D44]/25'
-              }`}>
-                {stop.type}
+              <span className="text-xs uppercase tracking-wider font-mono font-bold px-2 py-0.5 border rounded-xs bg-[#0F3D44]/10 text-[#0F3D44] border-[#0F3D44]/25">
+                0{index + 1}
               </span>
             </div>
-            <span className="font-mono text-xs text-[#2B2B2B] font-semibold tracking-wider">
+            <span className="font-mono text-xs text-[#2B2B2B] font-bold tracking-wider">
               {stop.years}
             </span>
           </div>
 
-          {/* Narrative capability label (Distinctly labeled as narrative chapter, NOT job title) */}
+          {/* Narrative capability label */}
           <div className="mb-3">
             <span className="text-[11px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
-              Narrative Chapter: {stop.narrativeLabel}
+              Strategic Phase: {stop.narrativeLabel}
             </span>
           </div>
 
           {/* Organisation & Official Role */}
           <div className="mb-4 pb-3 border-b border-[#2B2B2B]/12">
-            <h4 className="font-sans text-base font-bold text-[#1F1F1F]">
+            <h4 className="font-sans text-base sm:text-lg font-bold text-[#1F1F1F]">
               {stop.organisation}
             </h4>
-            <p className="font-serif text-lg text-[#0F3D44] font-medium mt-0.5">
+            <p className="font-serif text-lg sm:text-xl text-[#0F3D44] font-semibold mt-0.5">
               {stop.role}
             </p>
           </div>
 
           {/* Selected Achievements / Responsibilities */}
           <div className="space-y-2.5">
-            <h5 className="text-[11px] tracking-wider uppercase font-bold text-[#2B2B2B]">
+            <h5 className="text-[11px] tracking-wider uppercase font-bold text-[#0F3D44]">
               Selected Achievements & Impact
             </h5>
             <ul className="space-y-2">
               {stop.achievements.map((item, i) => (
-                <li key={i} className="flex items-start text-sm text-[#1F1F1F] leading-relaxed">
+                <li key={i} className="flex items-start text-sm text-[#1F1F1F] font-normal leading-relaxed">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#0F3D44] mt-2 mr-2.5 flex-shrink-0" />
                   <span>{item}</span>
                 </li>

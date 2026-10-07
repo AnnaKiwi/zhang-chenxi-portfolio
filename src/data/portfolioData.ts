@@ -114,13 +114,11 @@ export const PORTFOLIO_DATA = {
   ],
 
   capabilityProgression: [
-    { city: 'Bologna', capability: 'Design Foundation' },
     { city: 'Shenyang', capability: 'Brand & Consumer Engagement' },
     { city: 'Zhengzhou', capability: 'City-level Strategy' },
     { city: 'Tianjin & Beijing', capability: 'Leadership & Digital Growth' },
     { city: 'Suzhou', capability: 'Product & Go-to-Market Strategy' },
-    { city: 'Northeast China', capability: 'Regional Brand Governance' },
-    { city: 'Singapore', capability: 'Business AI' },
+    { city: 'Shenyang / Northeast China', capability: 'Regional Brand Governance' },
   ],
 
   careerTimeline: [
@@ -400,8 +398,8 @@ export const PORTFOLIO_DATA = {
       year: '2020',
       categories: ['Launch Events'],
       level: 'additional',
-      primaryImage: '/images/jiangshan-1.jpg',
-      allImages: ['/images/jiangshan-1.jpg', '/images/jiangshan-2.jpg'],
+      primaryImage: '/Images/jiangshan-1.jpg',
+      allImages: ['/Images/jiangshan-1.jpg', '/Images/jiangshan-2.jpg'],
       metrics: [
         { label: 'Organic Impressions', value: 'Millions' },
         { label: 'Media Outlets', value: '100+' },
@@ -439,8 +437,8 @@ export const PORTFOLIO_DATA = {
       year: '2019',
       categories: ['Launch Events'],
       level: 'additional',
-      primaryImage: '/images/chenyuan-1.jpg',
-      allImages: ['/images/chenyuan-1.jpg', '/images/chenyuan-2.jpg'],
+      primaryImage: '/Images/chenyuan-1.jpg',
+      allImages: ['/Images/chenyuan-1.jpg', '/Images/chenyuan-2.jpg'],
       metrics: [
         { label: 'Launch Day Units Sold', value: '329 Units' },
         { label: 'Sell-Through Rate', value: '93%' },
@@ -477,8 +475,8 @@ export const PORTFOLIO_DATA = {
       year: '2018–2020',
       categories: ['Content Marketing'],
       level: 'additional',
-      primaryImage: '/images/community-1.jpg',
-      allImages: ['/images/community-1.jpg', '/images/community-2.jpg'],
+      primaryImage: '/Images/community-1.jpg',
+      allImages: ['/Images/community-1.jpg', '/Images/community-2.jpg'],
       metrics: [
         { label: 'Annual Community Events', value: '200+' },
         { label: 'City-Level Activities', value: '100+' },
@@ -516,8 +514,8 @@ export const PORTFOLIO_DATA = {
       year: '2021',
       categories: ['Content Marketing'],
       level: 'additional',
-      primaryImage: '/images/zhengzhou-1.jpg',
-      allImages: ['/images/zhengzhou-1.jpg', '/images/zhengzhou-2.jpg', '/images/zhengzhou-3.jpg'],
+      primaryImage: '/Images/zhengzhou-1.jpg',
+      allImages: ['/Images/zhengzhou-1.jpg', '/Images/zhengzhou-2.jpg', '/Images/zhengzhou-3.jpg'],
       metrics: [
         { label: 'Zhihu Topic Heat', value: '32.67M+' },
         { label: 'TikTok Topic Views', value: '3.72M+ (5 Days)' },
@@ -559,8 +557,8 @@ export const PORTFOLIO_DATA = {
       year: '2014–2017',
       categories: ['Art & Design'],
       level: 'design-foundation',
-      primaryImage: '/images/theatre-1.jpg',
-      allImages: ['/images/theatre-1.jpg', '/images/theatre-2.jpg'],
+      primaryImage: '/Images/theatre-1.jpg',
+      allImages: ['/Images/theatre-1.jpg', '/Images/theatre-2.jpg'],
       overview:
         'Scenographic and architectural renovation proposal for an urban theatre complex in mountainous Benxi, investigating geometric decomposition, structural envelope design, and public circulation.',
       myRole:
@@ -590,8 +588,8 @@ export const PORTFOLIO_DATA = {
       year: '2014–2017',
       categories: ['Art & Design'],
       level: 'design-foundation',
-      primaryImage: '/images/cuore-1.jpg',
-      allImages: ['/images/cuore-1.jpg', '/images/minime-1.jpg'],
+      primaryImage: '/Images/cuore-1.jpg',
+      allImages: ['/Images/cuore-1.jpg', '/Images/minime-1.jpg'],
       overview:
         'Dual academic scenography and spatial studies exploring ecological open space planning and minimalist interior scenography.',
       myRole:
