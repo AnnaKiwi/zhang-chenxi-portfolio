@@ -87,7 +87,7 @@ export const PORTFOLIO_DATA = {
     email: 'cx.zhang.2026@mbai.smu.edu.sg',
     linkedinPlaceholder: 'https://linkedin.com/in/zhang-chenxi-placeholder',
     cvUrl: '/cv.pdf',
-    portraitUrl: '/Images/portrait/portraitJPG.JPG',
+    portraitUrl: '/Images/portrait/portrait.jpg',
   },
 
   snapshotFigures: [
@@ -236,7 +236,12 @@ export const PORTFOLIO_DATA = {
       level: 'hero',
       featuredOnHome: true,
       primaryImage: '/Images/qingyunque/qingyunque-01-hero.jpg',
-      allImages: ['/Images/qingyunque/qingyunque-01-hero.jpg', '/Images/qingyunque/qingyunque-02-architecture.jpg'],
+      allImages: [
+        '/Images/qingyunque/qingyunque-01-hero.jpg',
+        '/Images/qingyunque/qingyunque-02-architecture.jpg',
+        '/Images/qingyunque/qingyunque-03-detail.jpg',
+        '/Images/qingyunque/qingyunque-04-detail.jpg',
+      ],
       carouselImages: [
         {
           src: '/Images/qingyunque/qingyunque-01-hero.jpg',
@@ -247,6 +252,16 @@ export const PORTFOLIO_DATA = {
           src: '/Images/qingyunque/qingyunque-02-architecture.jpg',
           alt: 'Longfor Qingyun Que — Demonstration area architecture and arrival sanctuary',
           caption: 'Demonstration area architecture and hotel-style arrival sanctuary',
+        },
+        {
+          src: '/Images/qingyunque/qingyunque-03-detail.jpg',
+          alt: 'Longfor Qingyun Que — Demonstration area detail',
+          caption: 'Architectural craftsmanship and courtyard spatial details',
+        },
+        {
+          src: '/Images/qingyunque/qingyunque-04-detail.jpg',
+          alt: 'Longfor Qingyun Que — Interior craftsmanship detail',
+          caption: 'Interior craftsmanship and spatial atmosphere',
         },
       ],
       metrics: [
@@ -274,6 +289,18 @@ export const PORTFOLIO_DATA = {
           filename: 'qingyunque-02-architecture.jpg',
           src: '/Images/qingyunque/qingyunque-02-architecture.jpg',
         },
+        {
+          caption: 'Architectural craftsmanship and courtyard spatial details',
+          sourceRef: 'Portfolio PDF Page 11',
+          filename: 'qingyunque-03-detail.jpg',
+          src: '/Images/qingyunque/qingyunque-03-detail.jpg',
+        },
+        {
+          caption: 'Interior craftsmanship and spatial atmosphere',
+          sourceRef: 'Portfolio PDF Page 12',
+          filename: 'qingyunque-04-detail.jpg',
+          src: '/Images/qingyunque/qingyunque-04-detail.jpg',
+        },
       ],
     },
     {
@@ -287,7 +314,12 @@ export const PORTFOLIO_DATA = {
       level: 'hero',
       featuredOnHome: true,
       primaryImage: '/Images/jinmao/Jinmao-01-hero.jpg',
-      allImages: ['/Images/jinmao/Jinmao-01-hero.jpg', '/Images/jinmao/Jinmao-02-architecture.jpg'],
+      allImages: [
+        '/Images/jinmao/Jinmao-01-hero.jpg',
+        '/Images/jinmao/Jinmao-02-architecture.jpg',
+        '/Images/jinmao/Jinmao-03-detail.jpg',
+        '/Images/jinmao/Jinmao-04.jpg',
+      ],
       carouselImages: [
         {
           src: '/Images/jinmao/Jinmao-01-hero.jpg',
@@ -298,6 +330,16 @@ export const PORTFOLIO_DATA = {
           src: '/Images/jinmao/Jinmao-02-architecture.jpg',
           alt: 'Suzhou Jinmao Mansion — Demonstration area architecture and spatial design specifications',
           caption: 'Demonstration area architectural view and spatial design specifications',
+        },
+        {
+          src: '/Images/jinmao/Jinmao-03-detail.jpg',
+          alt: 'Suzhou Jinmao Mansion — Architectural and landscape detail',
+          caption: 'Landscape design and architectural craftsmanship',
+        },
+        {
+          src: '/Images/jinmao/Jinmao-04.jpg',
+          alt: 'Suzhou Jinmao Mansion — Interior and residential specifications',
+          caption: 'Interior spatial refinement and residential specifications',
         },
       ],
       metrics: [
@@ -325,6 +367,18 @@ export const PORTFOLIO_DATA = {
           filename: 'Jinmao-02-architecture.jpg',
           src: '/Images/jinmao/Jinmao-02-architecture.jpg',
         },
+        {
+          caption: 'Landscape design and architectural craftsmanship',
+          sourceRef: 'Portfolio PDF Page 5',
+          filename: 'Jinmao-03-detail.jpg',
+          src: '/Images/jinmao/Jinmao-03-detail.jpg',
+        },
+        {
+          caption: 'Interior spatial refinement and residential specifications',
+          sourceRef: 'Portfolio PDF Page 6',
+          filename: 'Jinmao-04.jpg',
+          src: '/Images/jinmao/Jinmao-04.jpg',
+        },
       ],
     },
     {
@@ -338,7 +392,11 @@ export const PORTFOLIO_DATA = {
       level: 'hero',
       featuredOnHome: true,
       primaryImage: '/Images/yinyue/yinyue-01-hero.jpg',
-      allImages: ['/Images/yinyue/yinyue-01-hero.jpg', '/Images/yinyue/yinyue-02-architecture.jpg', '/Images/yinyue/04-visual-identity.jpg'],
+      allImages: [
+        '/Images/yinyue/yinyue-01-hero.jpg',
+        '/Images/yinyue/yinyue-02-architecture.jpg',
+        '/Images/yinyue/yinyue-03-detail.jpg',
+      ],
       carouselImages: [
         {
           src: '/Images/yinyue/yinyue-01-hero.jpg',
@@ -351,9 +409,9 @@ export const PORTFOLIO_DATA = {
           caption: 'Demonstration area architecture and ceremonial garden spatial design',
         },
         {
-          src: '/Images/yinyue/04-visual-identity.jpg',
-          alt: 'Shenyang Vanke Yinyue — Visual identity system and launch campaign branding',
-          caption: 'Visual identity system, branding and launch event collaterals',
+          src: '/Images/yinyue/yinyue-03-detail.jpg',
+          alt: 'Shenyang Vanke Yinyue — Demonstration area architectural detail',
+          caption: 'Demonstration area detail and Oriental architectural craftsmanship',
         },
       ],
       metrics: [
@@ -382,10 +440,10 @@ export const PORTFOLIO_DATA = {
           src: '/Images/yinyue/yinyue-02-architecture.jpg',
         },
         {
-          caption: 'Visual identity system, branding and launch event collaterals',
+          caption: 'Demonstration area detail and Oriental architectural craftsmanship',
           sourceRef: 'Portfolio PDF Page 8',
-          filename: '04-visual-identity.jpg',
-          src: '/Images/yinyue/04-visual-identity.jpg',
+          filename: 'yinyue-03-detail.jpg',
+          src: '/Images/yinyue/yinyue-03-detail.jpg',
         },
       ],
     },
@@ -398,8 +456,23 @@ export const PORTFOLIO_DATA = {
       year: '2020',
       categories: ['Launch Events'],
       level: 'additional',
-      primaryImage: '/Images/jiangshan-1.jpg',
-      allImages: ['/Images/jiangshan-1.jpg', '/Images/jiangshan-2.jpg'],
+      primaryImage: '/Images/Jiangshan Mansion Global Launch/jiangshan-01-hero.jpg',
+      allImages: [
+        '/Images/Jiangshan Mansion Global Launch/jiangshan-01-hero.jpg',
+        '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.jpg',
+      ],
+      carouselImages: [
+        {
+          src: '/Images/Jiangshan Mansion Global Launch/jiangshan-01-hero.jpg',
+          alt: 'Jiangshan Mansion Global Launch — Holographic projection launch at Shenyang Imperial Palace Museum',
+          caption: 'Holographic projection launch at UNESCO World Heritage Shenyang Imperial Palace Museum',
+        },
+        {
+          src: '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.jpg',
+          alt: 'Jiangshan Mansion Global Launch — Forbidden City rooftop illumination and architectural stagecraft',
+          caption: 'Forbidden City rooftop illumination and architectural stagecraft',
+        },
+      ],
       metrics: [
         { label: 'Organic Impressions', value: 'Millions' },
         { label: 'Media Outlets', value: '100+' },
@@ -419,12 +492,14 @@ export const PORTFOLIO_DATA = {
         {
           caption: 'Holographic projection launch at Shenyang Imperial Palace Museum',
           sourceRef: 'Portfolio PDF Page 18',
-          filename: 'jiangshan-1.jpg',
+          filename: 'jiangshan-01-hero.jpg',
+          src: '/Images/Jiangshan Mansion Global Launch/jiangshan-01-hero.jpg',
         },
         {
           caption: 'Forbidden City rooftop illumination and architectural stagecraft',
           sourceRef: 'Portfolio PDF Page 18',
-          filename: 'jiangshan-2.jpg',
+          filename: 'jiangshan-02-detail.jpg',
+          src: '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.jpg',
         },
       ],
     },
@@ -475,8 +550,17 @@ export const PORTFOLIO_DATA = {
       year: '2018–2020',
       categories: ['Content Marketing'],
       level: 'additional',
-      primaryImage: '/Images/community-1.jpg',
-      allImages: ['/Images/community-1.jpg', '/Images/community-2.jpg'],
+      primaryImage: '/Images/Community & Cultural IP Programme/community-cultural-ip-01-hero.jpg',
+      allImages: [
+        '/Images/Community & Cultural IP Programme/community-cultural-ip-01-hero.jpg',
+      ],
+      carouselImages: [
+        {
+          src: '/Images/Community & Cultural IP Programme/community-cultural-ip-01-hero.jpg',
+          alt: 'Community & Cultural IP Programme — Community engagement and cultural IP operations',
+          caption: 'City-wide community engagement and cultural IP operations ("Happy Home")',
+        },
+      ],
       metrics: [
         { label: 'Annual Community Events', value: '200+' },
         { label: 'City-Level Activities', value: '100+' },
@@ -497,12 +581,8 @@ export const PORTFOLIO_DATA = {
         {
           caption: 'Community sports leagues, charity walks and family engagement programs',
           sourceRef: 'Portfolio PDF Page 19',
-          filename: 'community-1.jpg',
-        },
-        {
-          caption: 'Walking Library cultural IP launch and Liaoning TV Spring Festival gifts',
-          sourceRef: 'Portfolio PDF Page 20',
-          filename: 'community-2.jpg',
+          filename: 'community-cultural-ip-01-hero.jpg',
+          src: '/Images/Community & Cultural IP Programme/community-cultural-ip-01-hero.jpg',
         },
       ],
     },
@@ -514,8 +594,41 @@ export const PORTFOLIO_DATA = {
       year: '2021',
       categories: ['Content Marketing'],
       level: 'additional',
-      primaryImage: '/Images/zhengzhou-1.jpg',
-      allImages: ['/Images/zhengzhou-1.jpg', '/Images/zhengzhou-2.jpg', '/Images/zhengzhou-3.jpg'],
+      primaryImage: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-01-hero.jpg',
+      allImages: [
+        '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-01-hero.jpg',
+        '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-02-detail.jpg',
+        '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-03-detail.jpg',
+        '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-04-detail.jpg',
+        '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-05-detail.jpg',
+      ],
+      carouselImages: [
+        {
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-01-hero.jpg',
+          alt: 'Zhengzhou Citywide Content Marketing — Citywide integrated marketing campaign',
+          caption: 'Citywide integrated campaign calendar and marketing governance across 10 projects',
+        },
+        {
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-02-detail.jpg',
+          alt: 'Zhengzhou Citywide Content Marketing — Campaign detail and livestream studio operations',
+          caption: 'Hot Property Festival and city live room operations',
+        },
+        {
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-03-detail.jpg',
+          alt: 'Zhengzhou Citywide Content Marketing — Cross-industry partnership and viral topic heat',
+          caption: 'Zhihu cross-industry collaboration and national brand partnerships',
+        },
+        {
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-04-detail.jpg',
+          alt: 'Zhengzhou Citywide Content Marketing — TikTok challenge and digital media matrix',
+          caption: 'Double 11 TikTok challenge #BeautifulDreamsZheng11Realized',
+        },
+        {
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-05-detail.jpg',
+          alt: 'Zhengzhou Citywide Content Marketing — Marketing award and campaign performance results',
+          caption: 'Double 11 Marketing Award recognition and campaign performance analytics',
+        },
+      ],
       metrics: [
         { label: 'Zhihu Topic Heat', value: '32.67M+' },
         { label: 'TikTok Topic Views', value: '3.72M+ (5 Days)' },
@@ -535,17 +648,32 @@ export const PORTFOLIO_DATA = {
         {
           caption: 'Citywide integrated campaign calendar and Double 11 award recognition',
           sourceRef: 'Portfolio PDF Page 21',
-          filename: 'zhengzhou-1.jpg',
+          filename: 'zhengzhou-citywide-01-hero.jpg',
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-01-hero.jpg',
         },
         {
           caption: 'Hot Property Festival and live broadcast studio operations',
           sourceRef: 'Portfolio PDF Page 22',
-          filename: 'zhengzhou-2.jpg',
+          filename: 'zhengzhou-citywide-02-detail.jpg',
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-02-detail.jpg',
         },
         {
           caption: 'Zhihu cross-industry collaboration and TikTok hashtag campaign',
-          sourceRef: 'Portfolio PDF Page 23 & 25',
-          filename: 'zhengzhou-3.jpg',
+          sourceRef: 'Portfolio PDF Page 23',
+          filename: 'zhengzhou-citywide-03-detail.jpg',
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-03-detail.jpg',
+        },
+        {
+          caption: 'TikTok campaign collaterals and viral content distribution',
+          sourceRef: 'Portfolio PDF Page 24',
+          filename: 'zhengzhou-citywide-04-detail.jpg',
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-04-detail.jpg',
+        },
+        {
+          caption: 'Campaign performance recognition and media reach analytics',
+          sourceRef: 'Portfolio PDF Page 25',
+          filename: 'zhengzhou-citywide-05-detail.jpg',
+          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-05-detail.jpg',
         },
       ],
     },
@@ -557,8 +685,23 @@ export const PORTFOLIO_DATA = {
       year: '2014–2017',
       categories: ['Art & Design'],
       level: 'design-foundation',
-      primaryImage: '/Images/theatre-1.jpg',
-      allImages: ['/Images/theatre-1.jpg', '/Images/theatre-2.jpg'],
+      primaryImage: '/Images/Theatre Renovation Design/theatre-renovation-01-hero.jpg',
+      allImages: [
+        '/Images/Theatre Renovation Design/theatre-renovation-01-hero.jpg',
+        '/Images/Theatre Renovation Design/theatre-renovation-02-detail.jpg',
+      ],
+      carouselImages: [
+        {
+          src: '/Images/Theatre Renovation Design/theatre-renovation-01-hero.jpg',
+          alt: 'Theatre Renovation Design — Mountainous location analysis and facade design',
+          caption: 'Mountainous location analysis, structural origin and facade design concepts',
+        },
+        {
+          src: '/Images/Theatre Renovation Design/theatre-renovation-02-detail.jpg',
+          alt: 'Theatre Renovation Design — Architectural scale model and circulation plans',
+          caption: 'Architectural scale model, interior functional analysis and circulation plans',
+        },
+      ],
       overview:
         'Scenographic and architectural renovation proposal for an urban theatre complex in mountainous Benxi, investigating geometric decomposition, structural envelope design, and public circulation.',
       myRole:
@@ -571,12 +714,14 @@ export const PORTFOLIO_DATA = {
         {
           caption: 'Mountainous location analysis, structural origin and facade design concepts',
           sourceRef: 'Portfolio PDF Page 26',
-          filename: 'theatre-1.jpg',
+          filename: 'theatre-renovation-01-hero.jpg',
+          src: '/Images/Theatre Renovation Design/theatre-renovation-01-hero.jpg',
         },
         {
           caption: 'Architectural scale model, interior functional analysis and circulation plans',
           sourceRef: 'Portfolio PDF Page 27',
-          filename: 'theatre-2.jpg',
+          filename: 'theatre-renovation-02-detail.jpg',
+          src: '/Images/Theatre Renovation Design/theatre-renovation-02-detail.jpg',
         },
       ],
     },
@@ -588,8 +733,18 @@ export const PORTFOLIO_DATA = {
       year: '2014–2017',
       categories: ['Art & Design'],
       level: 'design-foundation',
-      primaryImage: '/Images/cuore-1.jpg',
-      allImages: ['/Images/cuore-1.jpg', '/Images/minime-1.jpg'],
+      primaryImage:
+        '/Images/Cuore della città & Minime chiave/Cuore della città & Minime chiave-01-hero.jpg',
+      allImages: [
+        '/Images/Cuore della città & Minime chiave/Cuore della città & Minime chiave-01-hero.jpg',
+      ],
+      carouselImages: [
+        {
+          src: '/Images/Cuore della città & Minime chiave/Cuore della città & Minime chiave-01-hero.jpg',
+          alt: 'Cuore della città & Minime chiave — Master plan and ecological park design',
+          caption: 'Cuore della città master plan, pond boardwalk design, and ecological zoning',
+        },
+      ],
       overview:
         'Dual academic scenography and spatial studies exploring ecological open space planning and minimalist interior scenography.',
       myRole:
@@ -602,12 +757,8 @@ export const PORTFOLIO_DATA = {
         {
           caption: 'Cuore della città master plan, pond boardwalk design, and ecological zoning',
           sourceRef: 'Portfolio PDF Page 28',
-          filename: 'cuore-1.jpg',
-        },
-        {
-          caption: 'Minime chiave interior scenography, linear lighting and chromatic studies',
-          sourceRef: 'Portfolio PDF Page 29',
-          filename: 'minime-1.jpg',
+          filename: 'Cuore della città & Minime chiave-01-hero.jpg',
+          src: '/Images/Cuore della città & Minime chiave/Cuore della città & Minime chiave-01-hero.jpg',
         },
       ],
     },

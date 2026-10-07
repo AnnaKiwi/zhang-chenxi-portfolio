@@ -129,7 +129,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
               src={slide.src}
               alt={slide.alt}
               loading={index === 0 ? 'eager' : 'lazy'}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
         );

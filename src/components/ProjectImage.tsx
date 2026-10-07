@@ -47,7 +47,7 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
           src={src}
           alt={alt}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
         />
       </div>
     );
@@ -66,7 +66,7 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
           alt={alt}
           loading="lazy"
           onError={() => setHasError(true)}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
         />
       ) : (
         /* Restrained, neutral architectural placeholder as strictly specified */
