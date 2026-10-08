@@ -26,7 +26,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         {project.carouselImages && project.carouselImages.length > 1 ? (
           <ProjectCarousel
             images={project.carouselImages}
-            aspectRatio={isHero ? 'aspect-[16/10]' : 'aspect-[16/11]'}
             onImageClick={() => onOpenDetail(project)}
           />
         ) : (
@@ -37,7 +36,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             chineseName={project.chineseName}
             sourceRef={project.evidence[0]?.sourceRef}
             caption={project.evidence[0]?.caption}
-            aspectRatio={isHero ? 'aspect-[16/10]' : 'aspect-[16/11]'}
           />
         )}
       </div>

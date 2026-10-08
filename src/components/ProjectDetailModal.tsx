@@ -102,7 +102,6 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             {project.carouselImages && project.carouselImages.length > 1 ? (
               <ProjectCarousel
                 images={project.carouselImages}
-                aspectRatio="aspect-[16/9]"
               />
             ) : (
               <ProjectImage
@@ -112,7 +111,6 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 chineseName={project.chineseName}
                 sourceRef={project.evidence[0]?.sourceRef}
                 caption={project.evidence[0]?.caption}
-                aspectRatio="aspect-[16/9]"
               />
             )}
           </div>
@@ -236,7 +234,6 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                         projectName={project.name}
                         sourceRef={item.sourceRef}
                         caption={item.caption}
-                        aspectRatio="aspect-[16/10]"
                       />
                       <div className="flex items-start justify-between gap-2 text-xs text-[#2B2B2B] px-1 font-medium">
                         <span>{item.caption}</span>

@@ -18,12 +18,13 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
   caption,
   sourceRef,
   className = '',
-  aspectRatio = 'aspect-[16/10]',
+  aspectRatio,
   projectName,
   chineseName,
   onClick,
 }) => {
   const [hasError, setHasError] = useState(false);
+  const [naturalAspect, setNaturalAspect] = useState<number | null>(null);
   const filename = src.split('/').pop() || src;
   const isRealAsset =
     src.startsWith('http://') ||
@@ -35,11 +36,30 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
     src.startsWith('/qingyunque/') ||
     src.startsWith('/yinyue/');
 
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth, naturalHeight } = e.currentTarget;
+    if (naturalWidth && naturalHeight && naturalHeight > 0) {
+      setNaturalAspect(naturalWidth / naturalHeight);
+    }
+  };
+
+  // If a specific Tailwind aspect ratio class is explicitly passed, honor it;
+  // otherwise, dynamically hug the image's natural aspect ratio, with a safe 16/9 fallback before load.
+  const containerStyle: React.CSSProperties =
+    aspectRatio
+      ? {}
+      : {
+          aspectRatio: naturalAspect ? `${naturalAspect}` : '16 / 9',
+        };
+
+  const aspectClass = aspectRatio || '';
+
   if (isRealAsset) {
     return (
       <div
         onClick={onClick}
-        className={`relative overflow-hidden bg-[#ECE8DF] border border-[#2B2B2B]/15 rounded-xs transition-all duration-300 group ${aspectRatio} ${className} ${
+        style={containerStyle}
+        className={`relative w-full overflow-hidden bg-[#ECE8DF] border border-[#2B2B2B]/15 rounded-xs transition-all duration-300 group ${aspectClass} ${className} ${
           onClick ? 'cursor-pointer hover:border-[#0F3D44]/60' : ''
         }`}
       >
@@ -47,7 +67,8 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
           src={src}
           alt={alt}
           loading="lazy"
-          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+          onLoad={handleImageLoad}
+          className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"
         />
       </div>
     );
@@ -56,7 +77,8 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`relative overflow-hidden bg-[#ECE8DF] border border-[#2B2B2B]/15 rounded-xs transition-all duration-300 group ${aspectRatio} ${className} ${
+      style={containerStyle}
+      className={`relative w-full overflow-hidden bg-[#ECE8DF] border border-[#2B2B2B]/15 rounded-xs transition-all duration-300 group ${aspectClass} ${className} ${
         onClick ? 'cursor-pointer hover:border-[#0F3D44]/60' : ''
       }`}
     >
@@ -65,8 +87,9 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
           src={src}
           alt={alt}
           loading="lazy"
+          onLoad={handleImageLoad}
           onError={() => setHasError(true)}
-          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+          className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"
         />
       ) : (
         /* Restrained, neutral architectural placeholder as strictly specified */

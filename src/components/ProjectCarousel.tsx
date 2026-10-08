@@ -16,7 +16,7 @@ interface ProjectCarouselProps {
 
 export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
   images,
-  aspectRatio = 'aspect-[16/10]',
+  aspectRatio,
   className = '',
   autoPlayInterval = 5000,
   onImageClick,
@@ -24,10 +24,36 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [slideAspects, setSlideAspects] = useState<Record<number, number>>({});
 
   // Touch tracking for mobile swipe gestures
   const touchStartXRef = useRef<number | null>(null);
   const touchStartYRef = useRef<number | null>(null);
+
+  const handleSlideLoad = (index: number, e: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth, naturalHeight } = e.currentTarget;
+    if (naturalWidth && naturalHeight && naturalHeight > 0) {
+      setSlideAspects((prev) => ({
+        ...prev,
+        [index]: naturalWidth / naturalHeight,
+      }));
+    }
+  };
+
+  // Determine aspect ratio for current slide or fallback to first slide or 16/9
+  const currentAspect =
+    slideAspects[currentIndex] ||
+    slideAspects[0] ||
+    1.7778; // standard 16/9 fallback
+
+  const containerStyle: React.CSSProperties =
+    aspectRatio
+      ? {}
+      : {
+          aspectRatio: `${currentAspect}`,
+        };
+
+  const aspectClass = aspectRatio || '';
 
   // Check for prefers-reduced-motion
   useEffect(() => {
@@ -104,7 +130,8 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
       role="region"
       aria-label="Project image carousel"
       aria-roledescription="carousel"
-      className={`relative overflow-hidden bg-[#ECE8DF] border border-[#2B2B2B]/15 rounded-xs group select-none ${aspectRatio} ${className}`}
+      style={containerStyle}
+      className={`relative w-full overflow-hidden bg-[#ECE8DF] border border-[#2B2B2B]/15 rounded-xs group select-none transition-[aspect-ratio] duration-300 ${aspectClass} ${className}`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
@@ -122,14 +149,15 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
             aria-label={`${index + 1} of ${images.length}`}
             aria-hidden={!isActive}
             className={`absolute inset-0 w-full h-full transition-opacity ${
-              prefersReducedMotion ? 'duration-0' : 'duration-1000 ease-in-out'
+              prefersReducedMotion ? 'duration-0' : 'duration-700 ease-in-out'
             } ${isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'}`}
           >
             <img
               src={slide.src}
               alt={slide.alt}
               loading={index === 0 ? 'eager' : 'lazy'}
-              className="w-full h-full object-contain"
+              onLoad={(e) => handleSlideLoad(index, e)}
+              className="w-full h-full object-contain object-center"
             />
           </div>
         );
