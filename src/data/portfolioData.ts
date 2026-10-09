@@ -571,42 +571,42 @@ export const PORTFOLIO_DATA = {
       categories: ['Launch Events'],
       level: 'additional',
       primaryImage:
-        '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-01.jpg',
+        '/Images/yinyue-launch/yinyue-launch-01.jpg',
       allImages: [
-        '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-01.jpg',
-        '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-02.jpg',
-        '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-03.mp4',
+        '/Images/yinyue-launch/yinyue-launch-01.jpg',
+        '/Images/yinyue-launch/yinyue-launch-02.jpg',
+        '/Images/yinyue-launch/yinyue-launch-03.mp4',
       ],
       carouselImages: [
         {
-          src: '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-01.jpg',
+          src: '/Images/yinyue-launch/yinyue-launch-01.jpg',
           alt: 'Shenyang Vanke Yinyue Product Launch — Flagship experiential product launch ceremony and live media choreography',
           caption:
             'Flagship experiential product launch ceremony and live media choreography',
           type: 'image',
         },
         {
-          src: '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-02.jpg',
+          src: '/Images/yinyue-launch/yinyue-launch-02.jpg',
           alt: 'Shenyang Vanke Yinyue Product Launch — Experiential spatial staging and ceremonial lighting design',
           caption:
             'Experiential spatial staging and ceremonial lighting design',
           type: 'image',
         },
         {
-          src: '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-03.mp4',
+          src: '/Images/yinyue-launch/yinyue-launch-03.mp4',
           alt: 'Shenyang Vanke Yinyue Product Launch — Ceremonial lighting and live launch video document',
           caption:
             'Ceremonial lighting and live launch video document',
           type: 'video',
           poster:
-            '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-01.jpg',
+            '/Images/yinyue-launch/yinyue-launch-01.jpg',
         },
       ],
       videos: [
         {
           title: 'Shenyang Vanke Yinyue Product Launch Ceremony Video Document',
-          src: '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-03.mp4',
-          poster: '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-01.jpg',
+          src: '/Images/yinyue-launch/yinyue-launch-03.mp4',
+          poster: '/Images/yinyue-launch/yinyue-launch-01.jpg',
         },
       ],
       overview:
@@ -622,15 +622,15 @@ export const PORTFOLIO_DATA = {
           caption:
             'Flagship experiential product launch ceremony and live media choreography',
           sourceRef: 'Portfolio PDF Page 8',
-          filename: 'Yinyue Product Launch-01.jpg',
-          src: '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-01.jpg',
+          filename: 'yinyue-launch-01.jpg',
+          src: '/Images/yinyue-launch/yinyue-launch-01.jpg',
         },
         {
           caption:
             'Experiential spatial staging and ceremonial lighting design',
           sourceRef: 'Portfolio PDF Page 8',
-          filename: 'Yinyue Product Launch-02.jpg',
-          src: '/Images/Shenyang Vanke Yinyue Product Launch/Yinyue Product Launch-02.jpg',
+          filename: 'yinyue-launch-02.jpg',
+          src: '/Images/yinyue-launch/yinyue-launch-02.jpg',
         },
       ],
     },
