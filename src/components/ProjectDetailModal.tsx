@@ -70,12 +70,12 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               <span>{project.categories.join(' / ')}</span>
             </div>
 
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#1F1F1F] leading-tight">
+            <h2 className="font-sans text-2xl sm:text-3xl md:text-4xl font-bold text-[#1F1F1F] leading-tight">
               {project.name}
             </h2>
 
             {project.chineseName && (
-              <p className="font-serif text-xl sm:text-2xl text-[#2B2B2B]/80 mt-0.5">
+              <p className="font-sans text-lg sm:text-xl text-[#2B2B2B]/80 mt-0.5 font-medium">
                 {project.chineseName}
               </p>
             )}
@@ -86,7 +86,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 p-4 bg-[#EAE5DA]/60 border border-[#2B2B2B]/15 rounded-xs">
               {project.metrics.map((metric, idx) => (
                 <div key={idx}>
-                  <span className="block font-serif text-xl sm:text-2xl font-bold text-[#0F3D44]">
+                  <span className="block font-sans text-xl sm:text-2xl font-bold text-[#0F3D44]">
                     {metric.value}
                   </span>
                   <span className="block text-xs text-[#2B2B2B] font-medium mt-0.5">
@@ -129,8 +129,10 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     )}
                     <video
                       controls
+                      playsInline
+                      preload="metadata"
                       poster={vid.poster}
-                      className="w-full aspect-[16/9] object-cover bg-black"
+                      className="w-full aspect-[16/9] object-contain object-center bg-black rounded-xs"
                     >
                       <source src={vid.src} type="video/mp4" />
                       Your browser does not support the video tag.

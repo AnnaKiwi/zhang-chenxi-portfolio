@@ -4,6 +4,8 @@ export interface CarouselSlide {
   src: string;
   alt: string;
   caption?: string;
+  type?: 'image' | 'video';
+  poster?: string;
 }
 
 interface ProjectCarouselProps {
@@ -23,12 +25,14 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [slideAspects, setSlideAspects] = useState<Record<number, number>>({});
 
   // Touch tracking for mobile swipe gestures
   const touchStartXRef = useRef<number | null>(null);
   const touchStartYRef = useRef<number | null>(null);
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
 
   const handleSlideLoad = (index: number, e: React.SyntheticEvent<HTMLImageElement>) => {
     const { naturalWidth, naturalHeight } = e.currentTarget;
@@ -36,6 +40,16 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
       setSlideAspects((prev) => ({
         ...prev,
         [index]: naturalWidth / naturalHeight,
+      }));
+    }
+  };
+
+  const handleVideoMetadata = (index: number, e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const { videoWidth, videoHeight } = e.currentTarget;
+    if (videoWidth && videoHeight && videoHeight > 0) {
+      setSlideAspects((prev) => ({
+        ...prev,
+        [index]: videoWidth / videoHeight,
       }));
     }
   };
@@ -60,11 +74,9 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
     if (typeof window !== 'undefined' && window.matchMedia) {
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       setPrefersReducedMotion(mediaQuery.matches);
-
       const handleChange = (e: MediaQueryListEvent) => {
         setPrefersReducedMotion(e.matches);
       };
-
       if (mediaQuery.addEventListener) {
         mediaQuery.addEventListener('change', handleChange);
         return () => mediaQuery.removeEventListener('change', handleChange);
@@ -73,23 +85,33 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
   }, []);
 
   const goToNext = useCallback(() => {
+    // Pause any currently playing video when changing slide
+    const currentVideo = videoRefs.current[currentIndex];
+    if (currentVideo && !currentVideo.paused) {
+      currentVideo.pause();
+    }
+    setIsVideoPlaying(false);
     setCurrentIndex((prev) => (prev + 1) % images.length);
-  }, [images.length]);
+  }, [currentIndex, images.length]);
 
   const goToPrev = useCallback(() => {
+    // Pause any currently playing video when changing slide
+    const currentVideo = videoRefs.current[currentIndex];
+    if (currentVideo && !currentVideo.paused) {
+      currentVideo.pause();
+    }
+    setIsVideoPlaying(false);
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  }, [images.length]);
+  }, [currentIndex, images.length]);
 
-  // Automatic rotation timer
+  // Automatic rotation timer - PAUSES if a video is playing or container hovered/paused
   useEffect(() => {
-    if (prefersReducedMotion || isPaused || images.length <= 1) return;
-
+    if (prefersReducedMotion || isPaused || isVideoPlaying || images.length <= 1) return;
     const timer = setInterval(() => {
       goToNext();
     }, autoPlayInterval);
-
     return () => clearInterval(timer);
-  }, [goToNext, autoPlayInterval, isPaused, prefersReducedMotion, images.length]);
+  }, [goToNext, autoPlayInterval, isPaused, isVideoPlaying, prefersReducedMotion, images.length]);
 
   // Touch handlers for mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -103,7 +125,6 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
       setIsPaused(false);
       return;
     }
-
     const deltaX = touchStartXRef.current - e.changedTouches[0].clientX;
     const deltaY = touchStartYRef.current - e.changedTouches[0].clientY;
 
@@ -128,7 +149,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
   return (
     <div
       role="region"
-      aria-label="Project image carousel"
+      aria-label="Project image and media carousel"
       aria-roledescription="carousel"
       style={containerStyle}
       className={`relative w-full overflow-hidden bg-[#ECE8DF] border border-[#2B2B2B]/15 rounded-xs group select-none transition-[aspect-ratio] duration-300 ${aspectClass} ${className}`}
@@ -141,6 +162,8 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
       {/* Slides with smooth, restrained crossfade */}
       {images.map((slide, index) => {
         const isActive = index === currentIndex;
+        const isVideo = slide.type === 'video' || slide.src.toLowerCase().endsWith('.mp4') || slide.src.toLowerCase().endsWith('.m4v');
+
         return (
           <div
             key={slide.src}
@@ -152,13 +175,41 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
               prefersReducedMotion ? 'duration-0' : 'duration-700 ease-in-out'
             } ${isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'}`}
           >
-            <img
-              src={slide.src}
-              alt={slide.alt}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              onLoad={(e) => handleSlideLoad(index, e)}
-              className="w-full h-full object-contain object-center"
-            />
+            {isVideo ? (
+              <video
+                ref={(el) => {
+                  videoRefs.current[index] = el;
+                }}
+                src={slide.src}
+                poster={slide.poster}
+                controls
+                playsInline
+                preload="metadata"
+                onLoadedMetadata={(e) => handleVideoMetadata(index, e)}
+                onPlay={() => {
+                  setIsVideoPlaying(true);
+                  setIsPaused(true);
+                }}
+                onPause={() => {
+                  setIsVideoPlaying(false);
+                }}
+                onEnded={() => {
+                  setIsVideoPlaying(false);
+                }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full h-full object-contain object-center bg-black"
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                onLoad={(e) => handleSlideLoad(index, e)}
+                className="w-full h-full object-contain object-center"
+              />
+            )}
           </div>
         );
       })}
@@ -207,6 +258,11 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
+                    const currentVideo = videoRefs.current[currentIndex];
+                    if (currentVideo && !currentVideo.paused) {
+                      currentVideo.pause();
+                    }
+                    setIsVideoPlaying(false);
                     setCurrentIndex(idx);
                   }}
                   aria-label={`Go to slide ${idx + 1}`}

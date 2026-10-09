@@ -6,10 +6,12 @@ import { CitySkyline } from '../components/CitySkyline';
 export const ExperienceView: React.FC = () => {
   const [activeStopId, setActiveStopId] = useState<string>('stop-2-shenyang');
 
-  // Professional progression consists of the 5 work stops (Bologna education is in Education section)
+  // Professional progression consists of the 5 corporate milestones
   const professionalStops = PORTFOLIO_DATA.careerTimeline.filter(
     (stop) => stop.type === 'Work'
   );
+
+  const educationCredentials = PORTFOLIO_DATA.educationCredentials;
 
   const scrollToSection = (id: string) => {
     setActiveStopId(id);
@@ -27,7 +29,11 @@ export const ExperienceView: React.FC = () => {
 
   // Track active stop on scroll
   useEffect(() => {
-    const allTrackedIds = [...professionalStops.map((s) => s.id), 'chapter-singapore'];
+    const allTrackedIds = [
+      ...professionalStops.map((s) => s.id),
+      'chapter-singapore',
+      'section-education',
+    ];
     const handleScroll = () => {
       const scrollPos = window.scrollY + 220;
       for (let i = allTrackedIds.length - 1; i >= 0; i--) {
@@ -69,7 +75,7 @@ export const ExperienceView: React.FC = () => {
               );
             })}
 
-            {/* Singapore Next Chapter Quick Link */}
+            {/* Singapore Academic Transition Link */}
             <span className="text-[#2B2B2B]/30 mx-1 hidden sm:inline">|</span>
             <button
               onClick={() => scrollToSection('chapter-singapore')}
@@ -79,7 +85,20 @@ export const ExperienceView: React.FC = () => {
                   : 'text-[#0F3D44] hover:bg-[#0F3D44]/10 font-bold'
               }`}
             >
-              Next Chapter: Singapore
+              Singapore (Business AI)
+            </button>
+
+            {/* Education Credentials Link */}
+            <span className="text-[#2B2B2B]/30 mx-1 hidden sm:inline">|</span>
+            <button
+              onClick={() => scrollToSection('section-education')}
+              className={`px-2.5 py-1 text-xs font-semibold rounded-xs transition-colors shrink-0 cursor-pointer ${
+                activeStopId === 'section-education'
+                  ? 'bg-[#0F3D44] text-[#F7F4EF] font-bold shadow-xs'
+                  : 'text-[#0F3D44] hover:bg-[#0F3D44]/10 font-bold'
+              }`}
+            >
+              Education
             </button>
           </div>
 
@@ -99,11 +118,11 @@ export const ExperienceView: React.FC = () => {
           <div className="flex items-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0F3D44]">
             <span className="font-mono">02</span>
             <span aria-hidden="true" className="text-[#2B2B2B]/40">/</span>
-            <span>Professional Milestones</span>
+            <span>Professional Experience & Academic Credentials</span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#1F1F1F] tracking-tight leading-[1.08]">
-            Career Journey
+          <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl font-bold text-[#1F1F1F] tracking-tight leading-[1.08]">
+            Experience & Education
           </h1>
 
           <p className="text-sm sm:text-base text-[#1F1F1F] font-normal max-w-3xl leading-relaxed">
@@ -161,7 +180,7 @@ export const ExperienceView: React.FC = () => {
                       {stop.years.split('–')[0].trim().split(' ')[1] || stop.years.split('–')[0]}
                     </span>
                   </div>
-                  <div className="font-serif font-bold text-base truncate">
+                  <div className="font-sans font-bold text-sm sm:text-base truncate">
                     {displayCity}
                   </div>
                   <div className={`text-[11px] truncate mt-1 font-medium ${isSelected ? 'text-[#F7F4EF]/90' : 'text-[#2B2B2B]'}`}>
@@ -173,94 +192,161 @@ export const ExperienceView: React.FC = () => {
           </div>
         </div>
 
-        {/* 5 Professional Progression Timeline Stops */}
-        <div className="space-y-1">
-          {professionalStops.map((stop, index) => (
-            <div key={stop.id} id={stop.id} className="scroll-mt-36">
-              <TimelineStop
-                stop={stop}
-                index={index}
-                total={professionalStops.length}
-              />
-            </div>
-          ))}
-        </div>
+        {/* SECTION A: PROFESSIONAL EXPERIENCE (5 STOPS + CONTINUOUS CONNECTOR TO SINGAPORE) */}
+        <section className="space-y-4">
+          <div className="border-b border-[#2B2B2B]/15 pb-2.5 flex items-baseline justify-between">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold">
+              Part A · Professional Experience
+            </span>
+            <span className="text-xs text-[#2B2B2B]/80 font-mono font-medium">
+              5 Corporate Milestones (2017–2026)
+            </span>
+          </div>
 
-        {/* NEXT CHAPTER · SINGAPORE (Separate Transition into Business AI) */}
-        <section id="chapter-singapore" className="scroll-mt-36 pt-4">
-          <div className="relative p-6 sm:p-8 bg-[#0F3D44]/6 border-2 border-[#0F3D44]/35 rounded-xs space-y-6">
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#0F3D44]/20 pb-4">
-              <div>
-                <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold block mb-1">
-                  Next Chapter · Singapore
-                </span>
-                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1F1F1F]">
-                  Business AI
-                </h2>
+          <div className="space-y-1">
+            {professionalStops.map((stop, index) => (
+              <div key={stop.id} id={stop.id} className="scroll-mt-36">
+                <TimelineStop
+                  stop={stop}
+                  index={index}
+                  total={professionalStops.length}
+                />
               </div>
-              <div className="sm:text-right">
-                <span className="font-mono text-xs text-[#0F3D44] font-bold tracking-wider block">
-                  Aug 2026 – Aug 2027
-                </span>
-                <span className="text-[11px] font-sans uppercase tracking-wider text-[#2B2B2B] font-bold">
-                  Strategic & Academic Transition
-                </span>
-              </div>
-            </div>
+            ))}
+          </div>
 
-            {/* Strategic Narrative */}
-            <p className="font-serif text-lg sm:text-xl text-[#1F1F1F] font-normal leading-relaxed max-w-3xl">
-              Communicates the transition from nine years of brand leadership and corporate marketing governance at four Fortune Global 500 developers into quantitative, data-driven Business AI at Singapore Management University — applying artificial intelligence to marketing analytics, consumer decision-making, and high-involvement purchasing.
-            </p>
+          {/* NEXT CHAPTER · SINGAPORE (CONTINUOUS VERTICAL TIMELINE CONNECTOR) */}
+          <div id="chapter-singapore" className="relative scroll-mt-36 pt-2">
+            {/* Visual connector line seamlessly entering the Academic Transition node */}
+            <div
+              className="absolute left-4 top-0 h-10 w-[1.5px] bg-[#0F3D44]/40"
+              aria-hidden="true"
+            />
 
-            {/* Details Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
-              <div className="p-5 bg-white/85 border border-[#2B2B2B]/15 rounded-xs space-y-2.5">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
-                  Institution & Degree
-                </span>
-                <h3 className="font-serif text-xl font-bold text-[#1F1F1F]">
-                  Singapore Management University
-                </h3>
-                <p className="text-xs font-bold text-[#0F3D44]">
-                  Lee Kong Chian School of Business
-                </p>
-                <p className="text-sm font-semibold text-[#1F1F1F]">
-                  Master of Science in Business AI candidate
-                </p>
-                <div className="pt-2.5 border-t border-[#2B2B2B]/10 text-xs text-[#2B2B2B] space-y-1.5">
-                  <p className="font-medium">
-                    <strong className="text-[#0F3D44] font-bold">Scholarship:</strong> Awarded prestigious Community Impact Scholarship.
-                  </p>
-                  <p className="font-medium">
-                    <strong className="text-[#0F3D44] font-bold">Availability:</strong> Full-time internship starting January 2027 in Singapore.
-                  </p>
+            <div className="flex items-start space-x-5">
+              {/* Distinct Differentiated Academic Node */}
+              <div className="relative z-10 flex-shrink-0 mt-2">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center border-2 bg-[#0F3D44] border-[#0F3D44] text-[#F7F4EF] shadow-xs">
+                  {/* Graduation Cap / Academic Transition Icon */}
+                  <svg className="w-4 h-4 text-[#F7F4EF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                  </svg>
                 </div>
               </div>
 
-              <div className="p-5 bg-white/85 border border-[#2B2B2B]/15 rounded-xs space-y-2.5">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
-                  Core Coursework & Research
-                </span>
-                <ul className="text-xs text-[#1F1F1F] space-y-2 leading-relaxed pt-1">
-                  <li className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#0F3D44] mt-1.5 shrink-0" />
-                    <span><strong className="font-bold">Coursework:</strong> AI-Powered Marketing, Human-AI Collaboration, Data-Driven Decision Making with AI, Data Storytelling and AI-augmented Influencing.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#0F3D44] mt-1.5 shrink-0" />
-                    <span><strong className="font-bold">Academic Research:</strong> Empirical study on AI-generated influencers in consumer and high-involvement purchasing decisions (accepted at APMA & CMIC 2026).</span>
-                  </li>
-                </ul>
+              {/* Differentiated Academic Transition Card */}
+              <div className="flex-grow p-6 sm:p-8 bg-[#0F3D44]/6 border-2 border-[#0F3D44]/35 rounded-xs space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#0F3D44]/20 pb-4">
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold block mb-1">
+                      Academic Transition · Future Direction
+                    </span>
+                    <h2 className="font-sans text-2xl sm:text-3xl font-bold text-[#1F1F1F]">
+                      Singapore Management University · Business AI
+                    </h2>
+                  </div>
+                  <div className="sm:text-right">
+                    <span className="font-mono text-xs text-[#0F3D44] font-bold tracking-wider block">
+                      Aug 2026 – Aug 2027
+                    </span>
+                    <span className="text-[11px] font-sans uppercase tracking-wider text-[#2B2B2B] font-bold">
+                      Lee Kong Chian School of Business
+                    </span>
+                  </div>
+                </div>
+
+                <p className="font-sans text-base sm:text-lg text-[#1F1F1F] font-normal leading-relaxed max-w-3xl">
+                  Communicates the transition from nine years of brand leadership and corporate marketing governance at four Fortune Global 500 developers into quantitative, data-driven Business AI at Singapore Management University — applying artificial intelligence to marketing analytics, consumer decision-making, and high-involvement purchasing.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
+                  <div className="p-5 bg-white/85 border border-[#2B2B2B]/15 rounded-xs space-y-2.5">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
+                      Institution & Degree
+                    </span>
+                    <h3 className="font-sans text-lg font-bold text-[#1F1F1F]">
+                      Singapore Management University
+                    </h3>
+                    <p className="text-xs font-bold text-[#0F3D44]">
+                      Lee Kong Chian School of Business
+                    </p>
+                    <p className="text-sm font-semibold text-[#1F1F1F]">
+                      Master of Science in Business AI candidate
+                    </p>
+                    <div className="pt-2.5 border-t border-[#2B2B2B]/10 text-xs text-[#2B2B2B] space-y-1.5">
+                      <p className="font-medium">
+                        <strong className="text-[#0F3D44] font-bold">Scholarship:</strong> Awarded prestigious Community Impact Scholarship.
+                      </p>
+                      <p className="font-medium">
+                        <strong className="text-[#0F3D44] font-bold">Availability:</strong> Full-time internship starting January 2027 in Singapore.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-5 bg-white/85 border border-[#2B2B2B]/15 rounded-xs space-y-2.5">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
+                      Core Coursework & Research
+                    </span>
+                    <ul className="text-xs text-[#1F1F1F] space-y-2 leading-relaxed pt-1">
+                      <li className="flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0F3D44] mt-1.5 shrink-0" />
+                        <span><strong className="font-bold">Coursework:</strong> AI-Powered Marketing, Human-AI Collaboration, Data-Driven Decision Making with AI, Data Storytelling and AI-augmented Influencing.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0F3D44] mt-1.5 shrink-0" />
+                        <span><strong className="font-bold">Academic Research:</strong> Empirical study on AI-generated influencers in consumer and high-involvement purchasing decisions (accepted at APMA & CMIC 2026).</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* SECTION B: EDUCATION CREDENTIALS (THE THREE ACADEMIC INSTITUTIONS) */}
+        <section id="section-education" className="scroll-mt-36 pt-6 space-y-6">
+          <div className="border-b border-[#2B2B2B]/15 pb-2.5 flex items-baseline justify-between">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold">
+              Part B · Academic Credentials
+            </span>
+            <span className="text-xs text-[#2B2B2B]/80 font-mono font-medium">
+              3 Higher Education Institutions
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {educationCredentials.map((edu, idx) => (
+              <div key={idx} className="p-5 sm:p-6 bg-white/70 border border-[#2B2B2B]/20 rounded-xs space-y-3">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#0F3D44] font-bold block">
+                  {edu.location}
+                </span>
+                <h3 className="font-sans text-lg font-bold text-[#1F1F1F] leading-tight">
+                  {edu.institution}
+                </h3>
+                {edu.school && (
+                  <p className="text-xs font-medium text-[#2B2B2B]/85">
+                    {edu.school}
+                  </p>
+                )}
+                <p className="text-sm font-bold text-[#0F3D44]">
+                  {edu.degree}
+                </p>
+                <p className="text-xs text-[#2B2B2B] font-mono font-semibold">
+                  {edu.period}
+                </p>
+                <p className="text-xs text-[#2B2B2B] pt-2 border-t border-[#2B2B2B]/10 leading-relaxed font-normal">
+                  {edu.details}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Contextual Back to Top Action at End of Journey */}
         <div className="pt-4 pb-2 border-t border-[#2B2B2B]/15 flex justify-between items-center text-xs font-bold">
-          <span className="text-[#2B2B2B] font-mono">End of Professional Progression (2017–2027)</span>
+          <span className="text-[#2B2B2B] font-mono">End of Professional & Academic Journey (2017–2027)</span>
           <button
             onClick={scrollToTop}
             className="px-4 py-2 border border-[#0F3D44] text-[#0F3D44] hover:bg-[#0F3D44] hover:text-[#F7F4EF] rounded-xs transition-colors flex items-center gap-1.5 cursor-pointer uppercase tracking-wider"

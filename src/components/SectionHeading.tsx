@@ -19,7 +19,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 }) => {
   return (
     <div className={`mb-8 sm:mb-10 ${align === 'center' ? 'text-center' : 'text-left'} ${className}`}>
-      {/* Editorial Kicker without pill wrapping */}
+      {/* Editorial Kicker */}
       {(number || kicker) && (
         <div className={`flex items-center gap-2 text-xs tracking-widest uppercase font-semibold text-[#0F3D44] mb-2 ${align === 'center' ? 'justify-center' : ''}`}>
           {number && <span className="font-mono text-[#0F3D44]">{number}</span>}
@@ -29,13 +29,13 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       )}
 
       {/* Main Title */}
-      <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#1F1F1F] leading-[1.12]">
+      <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1F1F1F] leading-[1.12]">
         {title}
       </h2>
 
       {/* Optional Editorial Subtitle */}
       {subtitle && (
-        <p className={`mt-3 text-base sm:text-lg text-[#2B2B2B]/85 max-w-2xl font-light leading-relaxed ${align === 'center' ? 'mx-auto' : ''}`}>
+        <p className={`mt-3 text-base sm:text-lg text-[#2B2B2B]/85 max-w-2xl font-normal leading-relaxed ${align === 'center' ? 'mx-auto' : ''}`}>
           {subtitle}
         </p>
       )}

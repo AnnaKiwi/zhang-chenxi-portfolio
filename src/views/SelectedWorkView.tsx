@@ -21,17 +21,20 @@ export const SelectedWorkView: React.FC<SelectedWorkViewProps> = ({
 
   const allProjects = PORTFOLIO_DATA.projects;
 
-  // Implement filter-specific ordering per Section 11 & 13
+  // Enforce explicit order per requirements:
+  // Level 01: Jinmao -> Yinyue -> Qingyun Que
+  // Level 02: Jiangshan -> Yinyue Launch -> Community IP -> Zhengzhou
+  // Level 03: Theatre Renovation -> Cuore della citta
   const getOrderedProjectsForFilter = (filter: Category): Project[] => {
     const byId = (id: string) => allProjects.find((p) => p.id === id);
 
     if (filter === 'All') {
       const orderedIds = [
-        'tianjin-longfor-qingyunque',
         'suzhou-jinmao-mansion',
         'shenyang-vanke-yinyue',
+        'tianjin-longfor-qingyunque',
         'jiangshan-mansion',
-        'shengjing-chenyuan',
+        'shenyang-vanke-yinyue-launch',
         'community-cultural-ip',
         'zhengzhou-content-marketing',
         'theatre-renovation-design',
@@ -42,19 +45,20 @@ export const SelectedWorkView: React.FC<SelectedWorkViewProps> = ({
 
     if (filter === 'Brand Strategy') {
       const orderedIds = [
-        'tianjin-longfor-qingyunque',
         'suzhou-jinmao-mansion',
         'shenyang-vanke-yinyue',
+        'tianjin-longfor-qingyunque',
+        'community-cultural-ip',
       ];
       return orderedIds.map(byId).filter(Boolean) as Project[];
     }
 
     if (filter === 'Launch Events') {
       const orderedIds = [
-        'jiangshan-mansion',
-        'shengjing-chenyuan',
-        'shenyang-vanke-yinyue',
         'suzhou-jinmao-mansion',
+        'shenyang-vanke-yinyue',
+        'jiangshan-mansion',
+        'shenyang-vanke-yinyue-launch',
       ];
       return orderedIds.map(byId).filter(Boolean) as Project[];
     }
@@ -97,7 +101,7 @@ export const SelectedWorkView: React.FC<SelectedWorkViewProps> = ({
           <span>Project Archive</span>
         </div>
 
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#1F1F1F] tracking-tight leading-[1.08]">
+        <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl font-bold text-[#1F1F1F] tracking-tight leading-[1.08]">
           Selected Work
         </h1>
 
@@ -105,7 +109,7 @@ export const SelectedWorkView: React.FC<SelectedWorkViewProps> = ({
           Evidence-based case studies spanning landmark property launches, enterprise digital marketing frameworks, and scenographic design roots.
         </p>
 
-        {/* High-Readability Filter Navigation Bar (Section 14) */}
+        {/* High-Readability Filter Navigation Bar */}
         <div className="pt-4 flex flex-wrap items-center gap-2 border-b border-[#2B2B2B]/15 pb-4">
           <span className="text-xs uppercase tracking-wider text-[#1F1F1F] font-bold mr-2">
             Filter:
@@ -132,19 +136,19 @@ export const SelectedWorkView: React.FC<SelectedWorkViewProps> = ({
       {/* When ALL filter is selected: Structured by 3 Conceptual Levels */}
       {isAllFilter ? (
         <div className="space-y-12">
-          {/* LEVEL 1: HERO CASES (1. Qingyun Que, 2. Jinmao Mansion, 3. Vanke Yinyue) */}
+          {/* LEVEL 01 — PROJECT STRATEGY & PLANNING (01 Jinmao -> 02 Yinyue -> 03 Qingyun Que) */}
           <section className="space-y-6">
             <div className="border-b border-[#2B2B2B]/15 pb-2.5 flex items-baseline justify-between">
               <div className="flex items-center gap-2.5">
                 <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold">
-                  Level 01
+                  LEVEL 01
                 </span>
-                <span className="text-sm font-serif font-medium text-[#1F1F1F]">
-                  Featured Hero Cases
+                <span className="text-sm font-sans font-bold text-[#1F1F1F] uppercase tracking-wide">
+                  PROJECT STRATEGY & PLANNING
                 </span>
               </div>
-              <span className="text-xs text-[#2B2B2B] font-mono font-medium">
-                3 cases (Ranked: Qingyun Que → Jinmao Mansion → Vanke Yinyue)
+              <span className="text-xs text-[#2B2B2B]/80 font-mono font-medium">
+                3 PROJECTS
               </span>
             </div>
 
@@ -160,19 +164,19 @@ export const SelectedWorkView: React.FC<SelectedWorkViewProps> = ({
             </div>
           </section>
 
-          {/* LEVEL 2: ADDITIONAL PROFESSIONAL WORK */}
+          {/* LEVEL 02 — BRAND & ACTIVATIONS */}
           <section className="space-y-6 pt-2">
             <div className="border-b border-[#2B2B2B]/15 pb-2.5 flex items-baseline justify-between">
               <div className="flex items-center gap-2.5">
                 <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold">
-                  Level 02
+                  LEVEL 02
                 </span>
-                <span className="text-sm font-serif font-medium text-[#1F1F1F]">
-                  Additional Professional Work
+                <span className="text-sm font-sans font-bold text-[#1F1F1F] uppercase tracking-wide">
+                  BRAND & ACTIVATIONS
                 </span>
               </div>
-              <span className="text-xs text-[#2B2B2B] font-mono font-medium">
-                {additionalProjects.length} cases
+              <span className="text-xs text-[#2B2B2B]/80 font-mono font-medium">
+                {additionalProjects.length} PROJECTS
               </span>
             </div>
 
@@ -188,19 +192,19 @@ export const SelectedWorkView: React.FC<SelectedWorkViewProps> = ({
             </div>
           </section>
 
-          {/* LEVEL 3: DESIGN FOUNDATION */}
+          {/* LEVEL 03 — DESIGN FOUNDATION */}
           <section className="space-y-6 pt-2">
             <div className="border-b border-[#2B2B2B]/15 pb-2.5 flex items-baseline justify-between">
               <div className="flex items-center gap-2.5">
                 <span className="text-xs font-mono uppercase tracking-widest text-[#0F3D44] font-bold">
-                  Level 03
+                  LEVEL 03
                 </span>
-                <span className="text-sm font-serif font-medium text-[#1F1F1F]">
-                  Design Foundation (Academic Scenography & Architecture)
+                <span className="text-sm font-sans font-bold text-[#1F1F1F] uppercase tracking-wide">
+                  DESIGN FOUNDATION
                 </span>
               </div>
-              <span className="text-xs text-[#2B2B2B] font-mono font-medium">
-                {designFoundationProjects.length} cases
+              <span className="text-xs text-[#2B2B2B]/80 font-mono font-medium">
+                {designFoundationProjects.length} PROJECTS
               </span>
             </div>
 
@@ -217,7 +221,7 @@ export const SelectedWorkView: React.FC<SelectedWorkViewProps> = ({
           </section>
         </div>
       ) : (
-        /* Category-Filtered View: Using Filter-Specific Prioritized Ordering */
+        /* Category-Filtered View */
         <div className="space-y-6">
           <div className="border-b border-[#2B2B2B]/15 pb-2.5 flex items-baseline justify-between">
             <div className="flex items-center gap-2.5">
@@ -225,8 +229,8 @@ export const SelectedWorkView: React.FC<SelectedWorkViewProps> = ({
                 Category: {activeFilter}
               </span>
             </div>
-            <span className="text-xs text-[#2B2B2B] font-mono font-medium">
-              {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'} (Prioritized order)
+            <span className="text-xs text-[#2B2B2B]/80 font-mono font-medium">
+              {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'}
             </span>
           </div>
 

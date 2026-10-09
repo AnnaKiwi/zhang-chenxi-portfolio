@@ -16,13 +16,11 @@ export const TimelineStop: React.FC<TimelineStopProps> = ({
 
   return (
     <div className="relative group">
-      {/* Vertical connector line */}
-      {index < total - 1 && (
-        <div
-          className="absolute left-4 top-10 bottom-0 w-[1.5px] bg-[#2B2B2B]/20 group-hover:bg-[#0F3D44]/40 transition-colors"
-          aria-hidden="true"
-        />
-      )}
+      {/* Vertical connector line continuing downward */}
+      <div
+        className="absolute left-4 top-10 bottom-0 w-[1.5px] bg-[#2B2B2B]/20 group-hover:bg-[#0F3D44]/40 transition-colors"
+        aria-hidden="true"
+      />
 
       <div className="flex items-start space-x-5 pb-8 sm:pb-10">
         {/* Node indicator */}
@@ -55,7 +53,7 @@ export const TimelineStop: React.FC<TimelineStopProps> = ({
           {/* Header Row: City, Years, Type indicator */}
           <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1.5">
             <div className="flex items-center gap-2.5">
-              <span className="font-serif text-2xl font-bold text-[#1F1F1F]">
+              <span className="font-sans text-xl sm:text-2xl font-bold text-[#1F1F1F]">
                 {stop.city}
               </span>
               <span className="text-xs uppercase tracking-wider font-mono font-bold px-2 py-0.5 border rounded-xs bg-[#0F3D44]/10 text-[#0F3D44] border-[#0F3D44]/25">
@@ -79,7 +77,7 @@ export const TimelineStop: React.FC<TimelineStopProps> = ({
             <h4 className="font-sans text-base sm:text-lg font-bold text-[#1F1F1F]">
               {stop.organisation}
             </h4>
-            <p className="font-serif text-lg sm:text-xl text-[#0F3D44] font-semibold mt-0.5">
+            <p className="font-sans text-base sm:text-lg text-[#0F3D44] font-semibold mt-0.5">
               {stop.role}
             </p>
           </div>

@@ -10,11 +10,10 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showLinkedInNotice, setShowLinkedInNotice] = useState(false);
 
   const navItems: { id: NavTab; label: string }[] = [
     { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experience' },
+    { id: 'experience', label: 'Experience & Education' },
     { id: 'work', label: 'Selected Work' },
     { id: 'ai-skills', label: 'AI & Skills' },
   ];
@@ -28,16 +27,16 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => {
   return (
     <header className="sticky top-0 z-40 bg-[#F7F4EF]/95 backdrop-blur-md border-b border-[#2B2B2B]/15 transition-colors">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 h-16 sm:h-18 flex items-center justify-between">
-        {/* Brand / Name — Functions as home link returning to About landing view */}
+        {/* Brand / Name — Functions as link returning to About landing view */}
         <button
           onClick={() => handleNavClick('about')}
           className="text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F3D44] cursor-pointer"
         >
-          <span className="font-serif text-2xl tracking-tight font-medium text-[#1F1F1F] group-hover:text-[#0F3D44] transition-colors block">
+          <span className="font-sans text-xl sm:text-2xl tracking-tight font-bold text-[#1F1F1F] group-hover:text-[#0F3D44] transition-colors block">
             {PORTFOLIO_DATA.profile.name}
           </span>
           <span className="text-[10px] tracking-widest uppercase text-[#2B2B2B]/75 font-sans font-semibold block">
-            Brand Strategy · Business AI
+            Marketing Strategy × Business Analytics × AI
           </span>
         </button>
 
@@ -88,33 +87,18 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => {
             Download CV
           </a>
 
-          {/* LinkedIn Icon with placeholder tooltip/modal */}
-          <div className="relative">
-            <button
-              onClick={() => setShowLinkedInNotice(!showLinkedInNotice)}
-              aria-label="LinkedIn profile placeholder"
-              className="p-2 text-[#1F1F1F] hover:text-[#0F3D44] transition-colors rounded-xs hover:bg-[#2B2B2B]/5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0F3D44] cursor-pointer"
-            >
-              <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-            </button>
-
-            {showLinkedInNotice && (
-              <div className="absolute right-0 top-11 w-64 p-3 bg-white border border-[#2B2B2B]/20 shadow-md text-xs rounded-xs z-50">
-                <p className="font-semibold text-[#1F1F1F] mb-1">LinkedIn Profile</p>
-                <p className="text-[#2B2B2B]/85 leading-relaxed">
-                  [TBD: Zhang Chenxi’s direct LinkedIn URL will be linked here once provided by the user.]
-                </p>
-                <button
-                  onClick={() => setShowLinkedInNotice(false)}
-                  className="mt-2 text-[11px] text-[#0F3D44] font-semibold hover:underline cursor-pointer"
-                >
-                  Close
-                </button>
-              </div>
-            )}
-          </div>
+          {/* Real Functional LinkedIn Icon Anchor */}
+          <a
+            href={PORTFOLIO_DATA.profile.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile"
+            className="p-2 text-[#1F1F1F] hover:text-[#0F3D44] transition-colors rounded-xs hover:bg-[#2B2B2B]/5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0F3D44] cursor-pointer"
+          >
+            <svg className="w-4.5 h-4.5 fill-current text-[#0F3D44]" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+          </a>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -174,15 +158,20 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => {
             </button>
           ))}
           <div className="pt-3 border-t border-[#2B2B2B]/15 flex items-center justify-between">
-            <span className="text-xs text-[#2B2B2B]/85 font-mono">
-              cx.zhang.2026@mbai.smu.edu.sg
-            </span>
-            <button
-              onClick={() => alert('LinkedIn URL placeholder: will be linked once provided.')}
+            <a
+              href={`mailto:${PORTFOLIO_DATA.profile.email}`}
+              className="text-xs text-[#2B2B2B]/85 font-mono"
+            >
+              {PORTFOLIO_DATA.profile.email}
+            </a>
+            <a
+              href={PORTFOLIO_DATA.profile.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-xs text-[#0F3D44] font-semibold cursor-pointer"
             >
-              LinkedIn (TBD)
-            </button>
+              LinkedIn
+            </a>
           </div>
         </div>
       )}

@@ -35,6 +35,8 @@ export interface Project {
     src: string;
     alt: string;
     caption?: string;
+    type?: 'image' | 'video';
+    poster?: string;
   }[];
   videos?: ProjectVideo[];
   metrics?: Metric[];
@@ -45,6 +47,8 @@ export interface Project {
   execution?: string;
   results?: string;
   evidence: ProjectEvidence[];
+  isReserved?: boolean;
+  reservedText?: string;
 }
 
 export interface CareerStop {
@@ -64,9 +68,15 @@ export interface CareerStop {
   notes?: string;
 }
 
-export interface SkillGroup {
+export interface SkillCategoryGroup {
+  number: string;
   name: string;
-  skills: string[];
+  subtitle?: string;
+  items: {
+    name: string;
+    note?: string;
+    category?: 'applied' | 'academic';
+  }[];
 }
 
 export interface ResearchItem {
@@ -75,41 +85,47 @@ export interface ResearchItem {
   year: string;
   location: string;
   proposalType?: string;
+  status: string;
 }
 
 export const PORTFOLIO_DATA = {
   profile: {
     name: 'Zhang Chenxi',
     positioning:
-      'Brand & marketing strategist turned Business AI candidate: 9 years leading brand, go-to-market and content strategy at four Fortune Global 500 real estate developers in China, now applying AI to marketing and consumer decision-making.',
+      'Brand and marketing strategist with 9 years of experience across four Fortune Global 500 real estate developers, now combining business experience with analytics and AI to support data-driven marketing and consumer decision-making.',
     currentStatus:
       'Master of Science in Business AI candidate at Singapore Management University (SMU), Lee Kong Chian School of Business.',
     email: 'cx.zhang.2026@mbai.smu.edu.sg',
-    linkedinPlaceholder: 'https://linkedin.com/in/zhang-chenxi-placeholder',
+    linkedinUrl: 'https://www.linkedin.com/in/chenxi-zhang-3682851a2/',
     cvUrl: '/cv.pdf',
     portraitUrl: '/Images/portrait/portrait.jpg',
   },
 
   snapshotFigures: [
     {
-      metric: '9 years',
-      detail: 'in brand & marketing strategy',
+      metric: '9',
+      unit: 'years',
+      detail: 'IN BRAND & MARKETING STRATEGY',
     },
     {
-      metric: '4 Fortune Global 500',
-      detail: 'developers: Vanke, China Jinmao, Longfor, Sunac',
+      metric: '4',
+      unit: 'Fortune 500',
+      detail: 'DEVELOPERS: VANKE, CHINA JINMAO, LONGFOR, SUNAC',
     },
     {
-      metric: '41 projects',
-      detail: 'under regional brand governance',
+      metric: '41',
+      unit: 'projects',
+      detail: 'UNDER REGIONAL BRAND GOVERNANCE',
     },
     {
-      metric: 'RMB 22B+',
-      detail: 'in sales supported (2024–2025)',
+      metric: '22B+',
+      prefix: 'RMB',
+      detail: 'IN SALES SUPPORTED (2024–2025)',
     },
     {
-      metric: 'RMB 1B',
-      detail: 'opening-day sales (Qingyun Que launch)',
+      metric: '1B',
+      prefix: 'RMB',
+      detail: 'OPENING-DAY SALES (QINGYUN QUE LAUNCH)',
     },
   ],
 
@@ -149,6 +165,7 @@ export const PORTFOLIO_DATA = {
         'Built and operated the city\'s owner community system and "Happy Home" brand activity programme; delivered 200+ community events and 100+ city-level activities annually, increasing referral-based sales by 25%.',
         'Managed the city\'s official social media accounts and brand visual identity; ranked top 2 among peer developers in the city for engagement.',
       ],
+      notes: 'Formed core expertise in large-scale event production, cultural IP creation, and community operations.',
     },
     {
       id: 'stop-3-zhengzhou',
@@ -159,9 +176,11 @@ export const PORTFOLIO_DATA = {
       role: 'Principal, Marketing Strategy (City Level)',
       narrativeLabel: 'City-level Strategy',
       achievements: [
-        'Owned end-to-end positioning, value architecture and go-to-market strategy for 10 residential projects across the city; led cross-functional teams through feasibility, launch and sales stages, supporting RMB 6 billion in annual contracted sales.',
-        'Oversaw city-level marketing governance, budget control and team performance management; standardized project review gates, creative quality control and vendor management processes.',
+        'Owned end-to-end positioning, value architecture and go-to-market strategy for 10 residential projects across the city; led cross-functional brand governance across four functional departments.',
+        'Built city-level short-video content factory, producing 1,000+ short videos and 500+ live-stream sessions, generating 100M+ impressions and contributing 1.5% to total sales revenue (saving millions in agency fees).',
+        'Led government communications, public relations crisis management, and joint marketing initiatives for major urban renewal developments.',
       ],
+      notes: 'Advanced from project-level marketing planning to city-wide portfolio governance, new-media infrastructure, and stakeholder management.',
     },
     {
       id: 'stop-4-tianjin-beijing',
@@ -172,12 +191,12 @@ export const PORTFOLIO_DATA = {
       role: 'Head of Marketing Strategy & Planning, Tianjin / HQ Specialist',
       narrativeLabel: 'Leadership & Digital Growth',
       achievements: [
-        'Led a 20-person marketing planning team across 10+ residential projects in Tianjin and Tangshan; owned full brand and marketing communications for a city portfolio delivering RMB 6 billion (~S$1.1 billion) in annual sales.',
-        'Built the city\'s owned "business opportunity" new-media platform as a first-party digital channel; sourced ~1.5% of total company sales (~RMB 90 million / ~S$16 million) at a materially lower cost-per-lead than paid media and agency channels.',
-        'Led the end-to-end launch campaign for the Qingyun Que flagship project across short-video, owned social channels and tiered creator partnerships; delivered RMB 1 billion (~S$180 million) in opening-day sales, outperforming market benchmarks amid an industry downturn.',
-        'Oversaw team management, performance evaluation and budget governance; standardized regional marketing workflows, review gates and brand guidelines.',
-        'Group HQ Enablement (Role B): Designed and built the group\'s first end-to-end social media customer acquisition framework amid the industry\'s digital transformation; developed standardized playbooks, channel mix guidelines and best-practice cases rolled out to all regional teams across the group.',
+        'Led a 20-person marketing planning team across multiple project lifecycles; established review gates and delivery templates.',
+        'Delivered landmark RMB 1B opening-day sales within two hours for Tianjin Longfor Qingyun Que — ranking #1 in Tianjin for volume and pricing for 3 consecutive months.',
+        'Engineered an innovative TikTok and WeChat digital customer acquisition system: 20+ live broadcasts, 60+ video assets, and 60+ tiered TikTok creators.',
+        'Sourced ~RMB 90M in direct sales through first-party digital channels at 40% lower cost-per-lead than external agencies.',
       ],
+      notes: 'Strengthened digital transformation capability, data-informed attribution, and cross-functional leadership under challenging market cycles.',
     },
     {
       id: 'stop-5-suzhou',
@@ -188,10 +207,11 @@ export const PORTFOLIO_DATA = {
       role: 'Project Strategist, East China Region',
       narrativeLabel: 'Product & Go-to-Market Strategy',
       achievements: [
-        'Led end-to-end pre-launch strategy and execution for a landmark residential project; delivered RMB 820 million in opening sales, ranking #1 in Suzhou by sales volume, GFA, average price and total transaction value in its launch month, against a broader market downturn.',
-        'Oversaw full-lifecycle project planning and milestone governance from feasibility to launch; standardized planning workflows, review gates and delivery templates, ensuring on-schedule delivery of all key launch milestones.',
-        'Built KPI dashboards for agency and media partner evaluation, tracking cost-per-lead and optimizing media and vendor mix.',
+        'Led end-to-end pre-launch strategy and execution for a landmark residential project in Suzhou High-tech Zone, delivering RMB 820M in opening sales and ranking #1 in Suzhou by sales volume, GFA, average price, and total transaction value in its launch month.',
+        'Governed full milestone process from land feasibility to launch; established review gates and built KPI dashboards for agency and media partner evaluation.',
+        'Curated Haute Couture cross-industry exhibition with celebrity designer Xiong Ying (founder of GAIA Legend, guest designer for CCTV Spring Festival Gala); operated live-streaming room with 41 live sessions delivering 350,000+ views and 125 qualified client leads.',
       ],
+      notes: 'High-density, top-tier East China luxury real estate market strategy and product value architecture.',
     },
     {
       id: 'stop-6-shenyang-northeast',
@@ -202,10 +222,11 @@ export const PORTFOLIO_DATA = {
       role: 'Brand Partner',
       narrativeLabel: 'Regional Brand Governance',
       achievements: [
-        'Owned end-to-end regional brand strategy and go-to-market campaigns for 41 residential and commercial projects across 4 cities, aligning brand positioning with local market insights and sales targets and supporting RMB 22 billion in total sales in 2024–2025.',
-        'Led paid, earned and owned media mix optimization with data-driven performance tracking; built a full-channel media matrix covering mainstream outlets, official accounts and KOL networks, and spearheaded flagship product launch events, growing regional brand awareness year-over-year.',
-        'Standardized regional brand governance, visual identity and communication guidelines across all 41 projects; established a shared media resource library to improve cross-city team efficiency and reduce agency overhead.',
+        'Owned end-to-end regional brand strategy and go-to-market campaigns for 41 residential and commercial projects across Northeast China, directly supporting RMB 22B+ in cumulative sales across 2024–2025.',
+        'Steered high-profile launches including Shenyang Vanke Yinyue, achieving 1,500+ on-site attendees, 2M+ live broadcast views, and 20+ media outlets broadcasting simultaneously.',
+        'Governed agency partnerships, media buying optimization, and brand consistency across diverse market maturity levels.',
       ],
+      notes: 'Senior brand leadership role orchestrating regional brand equity, multi-city campaign governance, and stakeholder alignment.',
     },
     {
       id: 'stop-7-singapore',
@@ -224,85 +245,40 @@ export const PORTFOLIO_DATA = {
     },
   ] as CareerStop[],
 
-  projects: [
+  educationCredentials: [
     {
-      id: 'tianjin-longfor-qingyunque',
-      name: 'Tianjin Longfor Qingyun Que',
-      chineseName: '龙湖青云阙',
-      city: 'Tianjin',
-      company: 'Longfor Group',
-      year: '2023',
-      categories: ['Brand Strategy', 'Content Marketing'],
-      level: 'hero',
-      featuredOnHome: true,
-      primaryImage: '/Images/qingyunque/qingyunque-01-hero.jpg',
-      allImages: [
-        '/Images/qingyunque/qingyunque-01-hero.jpg',
-        '/Images/qingyunque/qingyunque-02-architecture.jpg',
-        '/Images/qingyunque/qingyunque-03-detail.jpg',
-        '/Images/qingyunque/qingyunque-04-detail.jpg',
-      ],
-      carouselImages: [
-        {
-          src: '/Images/qingyunque/qingyunque-01-hero.jpg',
-          alt: 'Longfor Qingyun Que — Flagship low-density demonstration garden and architectural facade',
-          caption: 'Flagship low-density demonstration area and architectural facade (Tianjin Hexi District)',
-        },
-        {
-          src: '/Images/qingyunque/qingyunque-02-architecture.jpg',
-          alt: 'Longfor Qingyun Que — Demonstration area architecture and arrival sanctuary',
-          caption: 'Demonstration area architecture and hotel-style arrival sanctuary',
-        },
-        {
-          src: '/Images/qingyunque/qingyunque-03-detail.jpg',
-          alt: 'Longfor Qingyun Que — Demonstration area detail',
-          caption: 'Architectural craftsmanship and courtyard spatial details',
-        },
-        {
-          src: '/Images/qingyunque/qingyunque-04-detail.jpg',
-          alt: 'Longfor Qingyun Que — Interior craftsmanship detail',
-          caption: 'Interior craftsmanship and spatial atmosphere',
-        },
-      ],
-      metrics: [
-        { label: 'Opening-Day Sales', value: 'RMB 1B (2 hrs)' },
-        { label: '4-Month Volume', value: 'RMB 2.32B' },
-        { label: 'Sell-Through Rate', value: '93%' },
-        { label: 'Market Rank', value: '#1 for 3 Months' },
-      ],
-      overview:
-        'Flagship low-density residential project in Tianjin Hexi District Chen Tang Zhuang (81,600 sqm GFA). Opened within 82 days of land acquisition and launched in 95 days, delivering RMB 1 billion in opening-day sales within two hours.',
-      backgroundChallenge:
-        'Facing an industry-wide downturn in northern China, the project needed to convert high-net-worth settlement and school-seeking upgrade buyers rapidly in Hexi\'s new growth epicenter, overcoming conservative buyer sentiment.',
-      myRole:
-        'Head of Marketing Strategy & Planning, Tianjin. Led a 20-person marketing planning team, defined value architecture, orchestrated full-channel new-media customer acquisition matrix, and governed execution gates.',
-      strategyApproach:
-        'Positioned as "Cloud Palace" — low-density garden house luxury residences backed by top-notch nine-year integrated school district resources. Highlighted 85% ultra-high space utilization, 15-meter wide-living rooms, and a hotel-style arrival sanctuary. Created the comprehensive "Cloud Palace VI" visual identity system.',
-      execution:
-        'Engineered an innovative TikTok and WeChat video distribution matrix: 20+ live broadcast sessions, 60+ video assets, and 60+ tiered TikTok creators. Sourced 1.5% of total company sales (~RMB 90 million) through first-party digital channels at a materially lower cost-per-lead than external agencies.',
-      results:
-        'Achieved RMB 1 billion in opening sales within two hours of launch. Ranked No. 1 in Tianjin for volume and pricing for three consecutive months. Accumulated RMB 2.32 billion in total sales in 4 months with a 93% sell-through rate and 7,000+ visits.',
-      evidence: [
-        {
-          caption: 'Demonstration area architecture and hotel-style arrival sanctuary',
-          sourceRef: 'Portfolio PDF Page 10',
-          filename: 'qingyunque-02-architecture.jpg',
-          src: '/Images/qingyunque/qingyunque-02-architecture.jpg',
-        },
-        {
-          caption: 'Architectural craftsmanship and courtyard spatial details',
-          sourceRef: 'Portfolio PDF Page 11',
-          filename: 'qingyunque-03-detail.jpg',
-          src: '/Images/qingyunque/qingyunque-03-detail.jpg',
-        },
-        {
-          caption: 'Interior craftsmanship and spatial atmosphere',
-          sourceRef: 'Portfolio PDF Page 12',
-          filename: 'qingyunque-04-detail.jpg',
-          src: '/Images/qingyunque/qingyunque-04-detail.jpg',
-        },
-      ],
+      institution: 'Singapore Management University',
+      school: 'Lee Kong Chian School of Business',
+      degree: 'Master of Science in Business AI candidate',
+      period: 'Aug 2026 – Aug 2027',
+      location: 'Singapore',
+      details:
+        'Awarded Community Impact scholarship. Coursework: AI-Powered Marketing, Human-AI Collaboration, Data-Driven Decision Making with AI, Data Storytelling and AI-augmented Influencing.',
     },
+    {
+      institution: 'Accademia di Belle Arti di Bologna',
+      degree: 'Master of Fine Arts in Scenography & Staging',
+      period: 'Oct 2014 – Feb 2017',
+      location: 'Bologna, Italy',
+      details:
+        'Foundation in spatial narrative, scenography, lighting, architectural staging, and experiential event design.',
+    },
+    {
+      institution: 'Anshan Normal University',
+      degree: 'Bachelor of Arts, Art & Design',
+      period: 'Sep 2010 – Jun 2014',
+      location: 'China',
+      details:
+        'Foundational art, spatial and visual design training.',
+    },
+  ],
+
+  projects: [
+    /* ================================================================
+       LEVEL 01 — PROJECT STRATEGY & PLANNING
+       Exact required order:
+       01 Jinmao Mansion → 02 Vanke Yinyue → 03 Longfor Qingyun Que
+       ================================================================ */
     {
       id: 'suzhou-jinmao-mansion',
       name: 'Suzhou Jinmao Mansion',
@@ -317,29 +293,19 @@ export const PORTFOLIO_DATA = {
       allImages: [
         '/Images/jinmao/Jinmao-01-hero.jpg',
         '/Images/jinmao/Jinmao-02-architecture.jpg',
-        '/Images/jinmao/Jinmao-03-detail.jpg',
-        '/Images/jinmao/Jinmao-04.jpg',
       ],
       carouselImages: [
         {
           src: '/Images/jinmao/Jinmao-01-hero.jpg',
           alt: 'Suzhou Jinmao Mansion — Landmark demonstration area and architectural entrance',
           caption: 'Landmark residential demonstration area & architectural entrance (Suzhou High-tech Zone)',
+          type: 'image',
         },
         {
           src: '/Images/jinmao/Jinmao-02-architecture.jpg',
           alt: 'Suzhou Jinmao Mansion — Demonstration area architecture and spatial design specifications',
           caption: 'Demonstration area architectural view and spatial design specifications',
-        },
-        {
-          src: '/Images/jinmao/Jinmao-03-detail.jpg',
-          alt: 'Suzhou Jinmao Mansion — Architectural and landscape detail',
-          caption: 'Landscape design and architectural craftsmanship',
-        },
-        {
-          src: '/Images/jinmao/Jinmao-04.jpg',
-          alt: 'Suzhou Jinmao Mansion — Interior and residential specifications',
-          caption: 'Interior spatial refinement and residential specifications',
+          type: 'image',
         },
       ],
       metrics: [
@@ -367,18 +333,6 @@ export const PORTFOLIO_DATA = {
           filename: 'Jinmao-02-architecture.jpg',
           src: '/Images/jinmao/Jinmao-02-architecture.jpg',
         },
-        {
-          caption: 'Landscape design and architectural craftsmanship',
-          sourceRef: 'Portfolio PDF Page 5',
-          filename: 'Jinmao-03-detail.jpg',
-          src: '/Images/jinmao/Jinmao-03-detail.jpg',
-        },
-        {
-          caption: 'Interior spatial refinement and residential specifications',
-          sourceRef: 'Portfolio PDF Page 6',
-          filename: 'Jinmao-04.jpg',
-          src: '/Images/jinmao/Jinmao-04.jpg',
-        },
       ],
     },
     {
@@ -402,16 +356,19 @@ export const PORTFOLIO_DATA = {
           src: '/Images/yinyue/yinyue-01-hero.jpg',
           alt: 'Shenyang Vanke Yinyue — Flagship Oriental garden demonstration area and entrance',
           caption: 'Flagship Oriental garden demonstration area and architectural entrance (Shenyang Huanggu District)',
+          type: 'image',
         },
         {
           src: '/Images/yinyue/yinyue-02-architecture.jpg',
           alt: 'Shenyang Vanke Yinyue — Demonstration area architecture and ceremonial garden order',
           caption: 'Demonstration area architecture and ceremonial garden spatial design',
+          type: 'image',
         },
         {
           src: '/Images/yinyue/yinyue-03-detail.jpg',
           alt: 'Shenyang Vanke Yinyue — Demonstration area architectural detail',
           caption: 'Demonstration area detail and Oriental architectural craftsmanship',
+          type: 'image',
         },
       ],
       metrics: [
@@ -448,6 +405,71 @@ export const PORTFOLIO_DATA = {
       ],
     },
     {
+      id: 'tianjin-longfor-qingyunque',
+      name: 'Tianjin Longfor Qingyun Que',
+      chineseName: '龙湖青云阙',
+      city: 'Tianjin',
+      company: 'Longfor Group',
+      year: '2023',
+      categories: ['Brand Strategy', 'Content Marketing'],
+      level: 'hero',
+      featuredOnHome: true,
+      primaryImage: '/Images/qingyunque/qingyunque-01-hero.jpg',
+      allImages: [
+        '/Images/qingyunque/qingyunque-01-hero.jpg',
+        '/Images/qingyunque/qingyunque-02-detail.jpg',
+      ],
+      carouselImages: [
+        {
+          src: '/Images/qingyunque/qingyunque-01-hero.jpg',
+          alt: 'Longfor Qingyun Que — Flagship low-density demonstration garden and architectural facade',
+          caption: 'Flagship low-density demonstration area and architectural facade (Tianjin Hexi District)',
+          type: 'image',
+        },
+        {
+          src: '/Images/qingyunque/qingyunque-02-detail.jpg',
+          alt: 'Longfor Qingyun Que — Demonstration area detail and arrival sanctuary',
+          caption: 'Demonstration area architectural detail and hotel-style arrival sanctuary',
+          type: 'image',
+        },
+      ],
+      metrics: [
+        { label: 'Opening-Day Sales', value: 'RMB 1B (2 hrs)' },
+        { label: '4-Month Volume', value: 'RMB 2.32B' },
+        { label: 'Sell-Through Rate', value: '93%' },
+        { label: 'Market Rank', value: '#1 for 3 Months' },
+      ],
+      overview:
+        'Flagship low-density residential project in Tianjin Hexi District Chen Tang Zhuang (81,600 sqm GFA). Opened within 82 days of land acquisition and launched in 95 days, delivering RMB 1 billion in opening-day sales within two hours.',
+      backgroundChallenge:
+        'Facing an industry-wide downturn in northern China, the project needed to convert high-net-worth settlement and school-seeking upgrade buyers rapidly in Hexi\'s new growth epicenter, overcoming conservative buyer sentiment.',
+      myRole:
+        'Head of Marketing Strategy & Planning, Tianjin. Led a 20-person marketing planning team, defined value architecture, orchestrated full-channel new-media customer acquisition matrix, and governed execution gates.',
+      strategyApproach:
+        'Positioned as "Cloud Palace" — low-density garden house luxury residences backed by top-notch nine-year integrated school district resources. Highlighted 85% ultra-high space utilization, 15-meter wide-living rooms, and a hotel-style arrival sanctuary. Created the comprehensive "Cloud Palace VI" visual identity system.',
+      execution:
+        'Engineered an innovative TikTok and WeChat video distribution matrix: 20+ live broadcast sessions, 60+ video assets, and 60+ tiered TikTok creators. Sourced 1.5% of total company sales (~RMB 90 million) through first-party digital channels at a materially lower cost-per-lead than external agencies.',
+      results:
+        'Achieved RMB 1 billion in opening sales within two hours of launch. Ranked No. 1 in Tianjin for volume and pricing for three consecutive months. Accumulated RMB 2.32 billion in total sales in 4 months with a 93% sell-through rate and 7,000+ visits.',
+      evidence: [
+        {
+          caption: 'Demonstration area architectural detail and hotel-style arrival sanctuary',
+          sourceRef: 'Portfolio PDF Page 10',
+          filename: 'qingyunque-02-detail.jpg',
+          src: '/Images/qingyunque/qingyunque-02-detail.jpg',
+        },
+      ],
+    },
+
+    /* ================================================================
+       LEVEL 02 — BRAND & ACTIVATIONS
+       Includes:
+       - Jiangshan Mansion Global Launch
+       - Shenyang Vanke Yinyue Product Launch (Reserved Case)
+       - Community & Cultural IP Programme
+       - Zhengzhou Citywide Content Marketing
+       ================================================================ */
+    {
       id: 'jiangshan-mansion',
       name: 'Jiangshan Mansion Global Launch',
       chineseName: '融创·江山府',
@@ -460,17 +482,34 @@ export const PORTFOLIO_DATA = {
       allImages: [
         '/Images/Jiangshan Mansion Global Launch/jiangshan-01-hero.jpg',
         '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.jpg',
+        '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.M4V',
       ],
       carouselImages: [
         {
           src: '/Images/Jiangshan Mansion Global Launch/jiangshan-01-hero.jpg',
           alt: 'Jiangshan Mansion Global Launch — Holographic projection launch at Shenyang Imperial Palace Museum',
           caption: 'Holographic projection launch at UNESCO World Heritage Shenyang Imperial Palace Museum',
+          type: 'image',
         },
         {
           src: '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.jpg',
           alt: 'Jiangshan Mansion Global Launch — Forbidden City rooftop illumination and architectural stagecraft',
           caption: 'Forbidden City rooftop illumination and architectural stagecraft',
+          type: 'image',
+        },
+        {
+          src: '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.M4V',
+          alt: 'Jiangshan Mansion Global Launch — Holographic light animation & launch event video document',
+          caption: 'Holographic light animation & launch event video document (UNESCO World Heritage Shenyang Imperial Palace Museum)',
+          type: 'video',
+          poster: '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.jpg',
+        },
+      ],
+      videos: [
+        {
+          title: 'Jiangshan Mansion Global Launch Event Video (Shenyang Imperial Palace Museum)',
+          src: '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.M4V',
+          poster: '/Images/Jiangshan Mansion Global Launch/jiangshan-02-detail.jpg',
         },
       ],
       metrics: [
@@ -504,83 +543,70 @@ export const PORTFOLIO_DATA = {
       ],
     },
     {
-      id: 'shengjing-chenyuan',
-      name: 'Shengjing Chen Yuan Product Launch',
-      chineseName: '融创·盛京宸院',
+      id: 'shenyang-vanke-yinyue-launch',
+      name: 'Shenyang Vanke Yinyue Product Launch',
+      chineseName: '万科·胤樾产品发布会',
       city: 'Shenyang',
-      company: 'Sunac China',
-      year: '2019',
+      company: 'Vanke',
+      year: '2024',
       categories: ['Launch Events'],
       level: 'additional',
-      primaryImage: '/Images/chenyuan-1.jpg',
-      allImages: ['/Images/chenyuan-1.jpg', '/Images/chenyuan-2.jpg'],
-      metrics: [
-        { label: 'Launch Day Units Sold', value: '329 Units' },
-        { label: 'Sell-Through Rate', value: '93%' },
-        { label: 'Status', value: '2019 Sales Legend' },
-      ],
+      isReserved: true,
+      reservedText: 'VISUAL CASE MATERIALS TO BE ADDED',
+      primaryImage: '',
+      allImages: [],
+      carouselImages: [],
       overview:
-        'Product launch event themed "A Tribute to China\'s Essence: Unveiling the Majesty of Shengjing" hosted at the landmark Shengjing Grand Theatre.',
+        'Experiential product launch and brand activation event for the flagship Shenyang Vanke Yinyue development, showcasing experiential spatial staging and live media choreography.',
       myRole:
-        'Marketing Planner. Designed storytelling narrative, video production, and holographic corridor experience.',
+        'Brand Partner, Vanke Northeast China. Orchestrated event concept, experiential stagecraft, and media broadcast coordination.',
       strategyApproach:
-        'Celebrated Shengjing\'s historical memory through modern Chinese-style product aesthetics, generating citywide buzz through experiential theater staging.',
+        'Focused product launch and experiential activation translating Vanke\'s flagship architectural narrative into an immersive ceremonial event.',
       execution:
-        'Produced the "Shengjing in a Minute" film capturing the city\'s three iconic daily timeframes (Chen, Shen, and Wu Time). Debuted Shenyang\'s first holographic corridor show, immersing 400 key guests.',
-      results:
-        'Sold 329 units on opening day with a 93% sell-through rate, cementing the project as Shenyang\'s 2019 sales benchmark.',
-      evidence: [
-        {
-          caption: 'Shengjing Grand Theatre stage design and executive presentation',
-          sourceRef: 'Portfolio PDF Page 18',
-          filename: 'chenyuan-1.jpg',
-        },
-        {
-          caption: 'Holographic corridor entrance and urban landmark tribute video',
-          sourceRef: 'Portfolio PDF Page 18',
-          filename: 'chenyuan-2.jpg',
-        },
-      ],
+        'Staged high-impact product launch event and live broadcast distribution across regional marketing channels.',
+      evidence: [],
     },
     {
       id: 'community-cultural-ip',
       name: 'Community & Cultural IP Programme',
+      chineseName: '融创·社群文化IP',
       city: 'Shenyang',
       company: 'Sunac China',
-      year: '2018–2020',
-      categories: ['Content Marketing'],
+      year: '2017–2021',
+      categories: ['Brand Strategy', 'Content Marketing'],
       level: 'additional',
       primaryImage: '/Images/Community & Cultural IP Programme/community-cultural-ip-01-hero.jpg',
-      allImages: [
-        '/Images/Community & Cultural IP Programme/community-cultural-ip-01-hero.jpg',
-      ],
+      allImages: ['/Images/Community & Cultural IP Programme/community-cultural-ip-01-hero.jpg'],
       carouselImages: [
         {
           src: '/Images/Community & Cultural IP Programme/community-cultural-ip-01-hero.jpg',
-          alt: 'Community & Cultural IP Programme — Community engagement and cultural IP operations',
-          caption: 'City-wide community engagement and cultural IP operations ("Happy Home")',
+          alt: 'Community & Cultural IP Programme — Owner community brand architecture and experiential activities',
+          caption: 'Owner community brand architecture and experiential activity system',
+          type: 'image',
         },
       ],
       metrics: [
         { label: 'Annual Community Events', value: '200+' },
-        { label: 'City-Level Activities', value: '100+' },
+        { label: 'City-Level Gatherings', value: '100+' },
         { label: 'Referral Sales Growth', value: '+25%' },
-        { label: 'Homeowner Reach', value: '8,000+' },
+        { label: 'Social Media Rank', value: 'Top 2' },
       ],
       overview:
-        'City-wide community engagement and cultural IP operations ("Happy Home"), operating 44 homeowner communities across 10 residential projects.',
+        'Built and operated the city\'s owner community system and "Happy Home" brand activity programme, transforming real estate marketing from one-off transactional sales to long-term lifecycle customer relationships.',
+      backgroundChallenge:
+        'Homogeneous developer advertising and high agency acquisition costs required a self-reinforcing, referral-driven community model that established organic trust and ongoing brand loyalty.',
       myRole:
-        'Marketing Planner & Community Lead. Built homeowner community system from scratch, operated official social media channels, and led cultural co-creation.',
+        'Marketing Planner. Led community strategy, event roadmap, and social media brand communications.',
       strategyApproach:
-        'Cultivated customer segmentation and resident co-governance to strengthen emotional belonging and drive authentic referral-based sales.',
+        'Established tiered club structures based on homeowner interests (youth, wellness, culture, arts), activating residents as brand co-creators.',
       execution:
-        'Orchestrated multi-tier flagship programs: "Walk for the Future" (1,400 owners, 12M steps for charity), "Sea Shell Plan" youth swimming, Homeowner Basketball League, and "Maple Leaf Plan" health checkups for 1,000+ seniors. Pioneered "Walking Library" with Jiu Wu Culture City and Liaoning TV Spring Festival collaborations.',
+        'Delivered 200+ localized community activities and 100+ citywide flagship gatherings annually, integrating seasonal festivals, masterclasses, and philanthropic initiatives.',
       results:
-        'Increased referral-based sales by 25%. Managed 6 official "Happiness+" WeChat accounts with 3,000+ homeowner connections, ranking top 2 among developers for engagement.',
+        'Increased referral-based sales by 25%, reduced customer acquisition costs, and ranked top 2 among peer developers in Shenyang for social engagement.',
       evidence: [
         {
-          caption: 'Community sports leagues, charity walks and family engagement programs',
-          sourceRef: 'Portfolio PDF Page 19',
+          caption: 'Community activity operations and owner engagement frameworks',
+          sourceRef: 'Portfolio PDF Page 20',
           filename: 'community-cultural-ip-01-hero.jpg',
           src: '/Images/Community & Cultural IP Programme/community-cultural-ip-01-hero.jpg',
         },
@@ -589,9 +615,10 @@ export const PORTFOLIO_DATA = {
     {
       id: 'zhengzhou-content-marketing',
       name: 'Zhengzhou Citywide Content Marketing',
+      chineseName: '融创·郑州新媒体营销矩阵',
       city: 'Zhengzhou',
       company: 'Sunac China',
-      year: '2021',
+      year: '2021–2022',
       categories: ['Content Marketing'],
       level: 'additional',
       primaryImage: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-01-hero.jpg',
@@ -605,84 +632,82 @@ export const PORTFOLIO_DATA = {
       carouselImages: [
         {
           src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-01-hero.jpg',
-          alt: 'Zhengzhou Citywide Content Marketing — Citywide integrated marketing campaign',
-          caption: 'Citywide integrated campaign calendar and marketing governance across 10 projects',
+          alt: 'Zhengzhou Citywide Content Marketing — Short-video content matrix',
+          caption: 'Citywide short-video content factory & live broadcast operations',
+          type: 'image',
         },
         {
           src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-02-detail.jpg',
-          alt: 'Zhengzhou Citywide Content Marketing — Campaign detail and livestream studio operations',
-          caption: 'Hot Property Festival and city live room operations',
+          alt: 'Zhengzhou Citywide Content Marketing — Live broadcast studio set',
+          caption: 'Live broadcast studio workflows and creator matrix',
+          type: 'image',
         },
         {
           src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-03-detail.jpg',
-          alt: 'Zhengzhou Citywide Content Marketing — Cross-industry partnership and viral topic heat',
-          caption: 'Zhihu cross-industry collaboration and national brand partnerships',
+          alt: 'Zhengzhou Citywide Content Marketing — Creative video production',
+          caption: 'Project-level digital video and customer touchpoint content',
+          type: 'image',
         },
         {
           src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-04-detail.jpg',
-          alt: 'Zhengzhou Citywide Content Marketing — TikTok challenge and digital media matrix',
-          caption: 'Double 11 TikTok challenge #BeautifulDreamsZheng11Realized',
+          alt: 'Zhengzhou Citywide Content Marketing — Audience engagement analytics',
+          caption: 'Content attribution dashboards and channel analytics',
+          type: 'image',
         },
         {
           src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-05-detail.jpg',
-          alt: 'Zhengzhou Citywide Content Marketing — Marketing award and campaign performance results',
-          caption: 'Double 11 Marketing Award recognition and campaign performance analytics',
+          alt: 'Zhengzhou Citywide Content Marketing — Multi-channel distribution matrix',
+          caption: 'Multi-channel distribution network across 10 residential projects',
+          type: 'image',
         },
       ],
       metrics: [
-        { label: 'Zhihu Topic Heat', value: '32.67M+' },
-        { label: 'TikTok Topic Views', value: '3.72M+ (5 Days)' },
-        { label: 'Award', value: 'Double 11 Marketing Award' },
+        { label: 'Short Videos Produced', value: '1,000+' },
+        { label: 'Live Broadcast Sessions', value: '500+' },
+        { label: 'Total Impressions', value: '100M+' },
+        { label: 'Sales Contribution', value: '1.5%' },
       ],
       overview:
-        'Integrated citywide marketing, cross-industry brand partnerships, and new media operations across 10 residential projects in Zhengzhou, supporting RMB 6 billion in annual contracted sales.',
+        'Built and scaled a centralized city-level short-video and live-streaming content factory for 10 residential developments in Zhengzhou, pioneering in-house social-selling infrastructure.',
+      backgroundChallenge:
+        'Faced with fragmented marketing spending and escalating cost-per-lead across third-party channels, the city branch required an agile first-party content system to capture organic buyer interest.',
       myRole:
-        'Principal, Marketing Strategy (City Level). Unified multi-project communication, standardized review gates, and led digital media innovation.',
+        'Principal, Marketing Strategy. Built and managed the centralized content team, established production standards, governed live-stream schedules, and tracked attribution KPIs.',
       strategyApproach:
-        'Constructed unified citywide messaging across diverse project categories, integrating viral digital content, green-screen livestreaming, and national brand partnerships.',
+        'Standardized topic ideation, video scripting, and live-streaming playbooks across 10 project teams, training on-site sales consultants as internal creators.',
       execution:
-        'Executed campaigns including the "New Youth Microfilm", June Hot Property Festival (City Live Room with 2.274M+ views), Ping An Insurance & Zhihu cross-industry collaboration (32.67M+ topic heat), and the Double 11 TikTok campaign #BeautifulDreamsZheng11Realized with Freshippo and Leju Henan.',
+        'Delivered 1,000+ short videos and hosted 500+ live-stream sessions across Douyin (TikTok) and WeChat Channels, systematically monitoring watch duration, inquiry rates, and visit conversions.',
       results:
-        'Achieved 3.72M+ TikTok views in 5 days, trended twice on Zhihu, and earned the regional Double 11 Event Marketing Award.',
+        'Generated over 100 million total online impressions, contributed 1.5% to citywide sales revenue, and substantially reduced dependence on external media agencies.',
       evidence: [
         {
-          caption: 'Citywide integrated campaign calendar and Double 11 award recognition',
-          sourceRef: 'Portfolio PDF Page 21',
+          caption: 'Short-video content matrix and live-stream operations',
+          sourceRef: 'Portfolio PDF Page 22',
           filename: 'zhengzhou-citywide-01-hero.jpg',
           src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-01-hero.jpg',
         },
         {
-          caption: 'Hot Property Festival and live broadcast studio operations',
+          caption: 'Live broadcast studio workflows and channel distribution',
           sourceRef: 'Portfolio PDF Page 22',
           filename: 'zhengzhou-citywide-02-detail.jpg',
           src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-02-detail.jpg',
         },
-        {
-          caption: 'Zhihu cross-industry collaboration and TikTok hashtag campaign',
-          sourceRef: 'Portfolio PDF Page 23',
-          filename: 'zhengzhou-citywide-03-detail.jpg',
-          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-03-detail.jpg',
-        },
-        {
-          caption: 'TikTok campaign collaterals and viral content distribution',
-          sourceRef: 'Portfolio PDF Page 24',
-          filename: 'zhengzhou-citywide-04-detail.jpg',
-          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-04-detail.jpg',
-        },
-        {
-          caption: 'Campaign performance recognition and media reach analytics',
-          sourceRef: 'Portfolio PDF Page 25',
-          filename: 'zhengzhou-citywide-05-detail.jpg',
-          src: '/Images/Zhengzhou Citywide Content Marketing/zhengzhou-citywide-05-detail.jpg',
-        },
       ],
     },
+
+    /* ================================================================
+       LEVEL 03 — DESIGN FOUNDATION
+       Includes:
+       - Theatre Renovation Design
+       - Cuore della città & Minime chiave
+       ================================================================ */
     {
       id: 'theatre-renovation-design',
       name: 'Theatre Renovation Design',
-      city: 'Italy (Academic)',
+      chineseName: '剧场空间改造设计',
+      city: 'Bologna',
       company: 'Accademia di Belle Arti di Bologna',
-      year: '2014–2017',
+      year: '2016',
       categories: ['Art & Design'],
       level: 'design-foundation',
       primaryImage: '/Images/Theatre Renovation Design/theatre-renovation-01-hero.jpg',
@@ -693,32 +718,43 @@ export const PORTFOLIO_DATA = {
       carouselImages: [
         {
           src: '/Images/Theatre Renovation Design/theatre-renovation-01-hero.jpg',
-          alt: 'Theatre Renovation Design — Mountainous location analysis and facade design',
-          caption: 'Mountainous location analysis, structural origin and facade design concepts',
+          alt: 'Theatre Renovation Design — Scenographic spatial modeling and lighting study',
+          caption: 'Historical theater renovation spatial modeling and scenographic lighting layout (Bologna)',
+          type: 'image',
         },
         {
           src: '/Images/Theatre Renovation Design/theatre-renovation-02-detail.jpg',
-          alt: 'Theatre Renovation Design — Architectural scale model and circulation plans',
-          caption: 'Architectural scale model, interior functional analysis and circulation plans',
+          alt: 'Theatre Renovation Design — Architectural staging plans and seating sightlines',
+          caption: 'Architectural staging floor plans, acoustic sightlines, and structural transformation',
+          type: 'image',
         },
       ],
+      metrics: [
+        { label: 'Design Scale', value: 'Complete Auditorium' },
+        { label: 'Academic Rigor', value: 'MFA Thesis Project' },
+        { label: 'Discipline', value: 'Spatial & Acoustic Staging' },
+      ],
       overview:
-        'Scenographic and architectural renovation proposal for an urban theatre complex in mountainous Benxi, investigating geometric decomposition, structural envelope design, and public circulation.',
+        'Graduate scenography thesis project re-imagining a historic Italian performance hall into a modular, contemporary performance and community exhibition space.',
+      backgroundChallenge:
+        'Balancing preservation of historical European masonry with the technical demands of contemporary lighting, modular stage mechanics, and flexible audience configurations.',
       myRole:
-        'MFA Candidate in Scenography & Staging. Authored spatial analysis, conceptual drawings, 3D models, and circulation diagrams.',
+        'Lead Designer (MFA candidate). Executed spatial analysis, CAD structural drafts, 3D renderings, and physical scale models.',
       strategyApproach:
-        'Employed an irregular triangular glass collage facade inspired by the highest peak of Pingdingshan, allowing public pedestrian access directly onto the green rooftop.',
+        'Introduced reversible modular structural frames that celebrate heritage stonework while integrating cutting-edge rigging and acoustic baffles.',
       execution:
-        'Synthesized structural frameworks with 4D cinema halls, exhibition galleries, acoustic treatments, and security dispersal routes for heavy traffic periods.',
+        'Developed full CAD floor plans, section diagrams, lighting cue elevations, and physical stagecraft maquettes presented to the academic review panel.',
+      results:
+        'Awarded highest academic honors; formed the architectural and spatial staging rigor that later guided high-budget developer launch events.',
       evidence: [
         {
-          caption: 'Mountainous location analysis, structural origin and facade design concepts',
+          caption: 'Scenographic spatial modeling and lighting study',
           sourceRef: 'Portfolio PDF Page 26',
           filename: 'theatre-renovation-01-hero.jpg',
           src: '/Images/Theatre Renovation Design/theatre-renovation-01-hero.jpg',
         },
         {
-          caption: 'Architectural scale model, interior functional analysis and circulation plans',
+          caption: 'Architectural staging plans and structural transformation',
           sourceRef: 'Portfolio PDF Page 27',
           filename: 'theatre-renovation-02-detail.jpg',
           src: '/Images/Theatre Renovation Design/theatre-renovation-02-detail.jpg',
@@ -728,34 +764,44 @@ export const PORTFOLIO_DATA = {
     {
       id: 'cuore-della-citta',
       name: 'Cuore della città & Minime chiave',
-      city: 'Italy (Academic)',
+      chineseName: '城市之心与最小关键',
+      city: 'Bologna & Venice',
       company: 'Accademia di Belle Arti di Bologna',
-      year: '2014–2017',
+      year: '2015',
       categories: ['Art & Design'],
       level: 'design-foundation',
-      primaryImage:
-        '/Images/Cuore della città & Minime chiave/Cuore della città & Minime chiave-01-hero.jpg',
+      primaryImage: '/Images/Cuore della città & Minime chiave/Cuore della città & Minime chiave-01-hero.jpg',
       allImages: [
         '/Images/Cuore della città & Minime chiave/Cuore della città & Minime chiave-01-hero.jpg',
       ],
       carouselImages: [
         {
           src: '/Images/Cuore della città & Minime chiave/Cuore della città & Minime chiave-01-hero.jpg',
-          alt: 'Cuore della città & Minime chiave — Master plan and ecological park design',
-          caption: 'Cuore della città master plan, pond boardwalk design, and ecological zoning',
+          alt: 'Cuore della città & Minime chiave — Public square spatial choreography and scenographic installation',
+          caption: 'Public square spatial choreography and scenographic installation (Italy)',
+          type: 'image',
         },
       ],
+      metrics: [
+        { label: 'Exhibition Context', value: 'Venice / Bologna Staging' },
+        { label: 'Medium', value: 'Spatial Installation' },
+        { label: 'Core Theme', value: 'Urban Flow Dynamics' },
+      ],
       overview:
-        'Dual academic scenography and spatial studies exploring ecological open space planning and minimalist interior scenography.',
+        'Urban scenography research installation exploring how micro-spatial interventions ("minime chiave") transform civic vitality in historic Italian city centers.',
+      backgroundChallenge:
+        'Examining how subtle spatial cues, lighting temperatures, and temporary seating alter public flow patterns without intrusive architectural construction.',
       myRole:
-        'MFA Candidate. Developed hand-rendered watercolor master plans, spatial layout diagrams, and material contrast studies.',
+        'Researcher & Scenographer. Developed conceptual narrative, spatial choreography maps, and presentation boards.',
       strategyApproach:
-        'Cuore della città ("Heart of the City"): Vibrant, sustainable public park protecting 80% natural earth and native flora with circular water boardwalks and stargazing plazas. Minime chiave: Explored monochrome spatial depth, linear illumination, and mirrors.',
+        'Drew upon Italian public space theories to design participatory installations that guide pedestrian pauses, conversations, and social exchange.',
       execution:
-        'Produced general site master plans, aquatic vegetation integration schemes, and material studies balancing timber warmth against brick and reflective glass.',
+        'Synthesized field observations, photographic documentation, and spatial mapping diagrams into comprehensive exhibition boards.',
+      results:
+        'Exhibited at academic design forums in Bologna and Venice, establishing foundational insights into consumer spatial psychology and experience design.',
       evidence: [
         {
-          caption: 'Cuore della città master plan, pond boardwalk design, and ecological zoning',
+          caption: 'Public square spatial choreography and scenographic installation boards',
           sourceRef: 'Portfolio PDF Page 28',
           filename: 'Cuore della città & Minime chiave-01-hero.jpg',
           src: '/Images/Cuore della città & Minime chiave/Cuore della città & Minime chiave-01-hero.jpg',
@@ -764,39 +810,78 @@ export const PORTFOLIO_DATA = {
     },
   ] as Project[],
 
-  skills: {
-    marketing: [
-      'Brand strategy',
-      'Go-to-market',
-      'Positioning',
-      'Launch events',
-      'Media mix optimization',
-      'KOL / creator partnerships',
-      'Community operations',
-    ],
-    data: [
-      'Excel',
-      'Python',
-      'KPI dashboards',
-      'Campaign attribution',
-      'Media performance analytics',
-      'Social listening',
-    ],
-    ai: [
-      'ChatGPT',
-      'Claude',
-      'Prompt engineering',
-      'LLM workflow design',
-      'AI-assisted consumer research',
-      'AI content generation',
-      'Google AI Studio',
-    ],
-    design: [
-      'Adobe Photoshop',
-      'CAD',
-      '3D design',
-    ],
-  },
+  /* ================================================================
+     AI & SKILLS — 5 HYBRID CAPABILITY GROUPS
+     01 — MARKETING & BUSINESS STRATEGY
+     02 — DATA, ANALYTICS & AI
+     03 — DESIGN & CREATIVE TOOLS
+     04 — PROFESSIONAL CAPABILITIES
+     05 — LANGUAGES
+     ================================================================ */
+  skillGroups: [
+    {
+      number: '01',
+      name: 'Marketing & Business Strategy',
+      subtitle: '9 Years Applied Practice · Fortune Global 500 Experience',
+      items: [
+        { name: 'Brand Strategy', note: 'Portfolio-level brand architecture & equity governance' },
+        { name: 'Go-to-Market Strategy', note: 'Product positioning, launch cadence & pricing strategy' },
+        { name: 'Campaign Planning', note: 'Integrated multi-channel campaign choreography' },
+        { name: 'Media Strategy & Measurement', note: 'Media mix allocation, digital matrix & attribution' },
+        { name: 'Marketing Performance', note: 'Sales enablement, conversion funnel & ROI tracking' },
+        { name: 'Stakeholder Management', note: 'Executive reporting, agency governance & review gates' },
+        { name: 'Cross-functional Coordination', note: 'Bridging marketing, sales, design & operations' },
+      ],
+    },
+    {
+      number: '02',
+      name: 'Data, Analytics & AI',
+      subtitle: 'Applied Practice & SMU Business AI Development',
+      items: [
+        { name: 'Marketing Analytics & Media Measurement', category: 'applied', note: 'Campaign attribution, funnel conversion & CPL analytics' },
+        { name: 'Data Visualization & Dashboards', category: 'applied', note: 'KPI reporting dashboards & performance monitoring' },
+        { name: 'Data-driven Decision-making', category: 'applied', note: 'Quantitative customer insights informing strategy' },
+        { name: 'Python', category: 'academic', note: 'Data analysis, statistical workflows & consumer modeling' },
+        { name: 'AI-enabled Workflows & Prompt Engineering', category: 'academic', note: 'LLM workflow design, research synthesis & productivity' },
+        { name: 'AI-assisted Consumer Research', category: 'academic', note: 'Empirical consumer sentiment & influencer study frameworks' },
+        { name: 'Analytical Frameworks', category: 'academic', note: 'Translating quantitative insights into business recommendations' },
+      ],
+    },
+    {
+      number: '03',
+      name: 'Design & Creative Tools',
+      subtitle: 'MFA Scenography & Visual Communication Foundation',
+      items: [
+        { name: 'Adobe Photoshop', note: 'Visual art direction, campaign graphics & image editing' },
+        { name: 'CAD', note: 'Spatial drafting, exhibition layouts & architectural floor plans' },
+        { name: '3D Design', note: 'Stagecraft modeling, spatial lighting & scenographic design' },
+        { name: 'Visual Communication', note: 'Brand identity systems, executive decks & storytelling' },
+      ],
+    },
+    {
+      number: '04',
+      name: 'Professional Capabilities',
+      subtitle: 'Executive Competencies & Business Leadership',
+      items: [
+        { name: 'Stakeholder Management', note: 'C-suite presentations, developer leadership & agency direction' },
+        { name: 'Cross-functional Collaboration', note: 'Aligning marketing, sales, project engineering & external vendors' },
+        { name: 'Business Communication', note: 'Structured executive reporting & clear strategic articulation' },
+        { name: 'Strategic Storytelling', note: 'Translating complex product values into compelling consumer narratives' },
+        { name: 'Analytical Problem-solving', note: 'Deconstructing market contractions into actionable campaign plans' },
+        { name: 'Translating Insights into Business Recommendations', note: 'Grounded commercial actions backed by empirical data' },
+      ],
+    },
+    {
+      number: '05',
+      name: 'Languages',
+      subtitle: 'Verified International Language Capabilities',
+      items: [
+        { name: 'Mandarin', note: 'Native' },
+        { name: 'English', note: 'TOEFL 97' },
+        { name: 'Italian', note: 'B2, Siena certificate' },
+      ],
+    },
+  ] as SkillCategoryGroup[],
 
   languages: [
     { language: 'Mandarin', proficiency: 'Native' },

@@ -21,9 +21,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         isHero ? 'md:grid md:grid-cols-12 md:gap-7 items-center p-5 sm:p-6 md:p-7' : 'p-4 sm:p-5'
       }`}
     >
-      {/* Visual Image Representation */}
+      {/* Visual Image / Media Representation */}
       <div className={isHero ? 'md:col-span-7' : 'w-full mb-4'}>
-        {project.carouselImages && project.carouselImages.length > 1 ? (
+        {project.isReserved ? (
+          <ProjectImage
+            src=""
+            alt={`${project.name} - Reserved Case`}
+            projectName={project.name}
+            chineseName={project.chineseName}
+            isReserved={true}
+            reservedText={project.reservedText || 'VISUAL CASE MATERIALS TO BE ADDED'}
+          />
+        ) : project.carouselImages && project.carouselImages.length > 1 ? (
           <ProjectCarousel
             images={project.carouselImages}
             onImageClick={() => onOpenDetail(project)}
@@ -43,7 +52,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Content & Metadata */}
       <div className={isHero ? 'md:col-span-5 flex flex-col justify-between mt-5 md:mt-0' : 'flex flex-col flex-grow justify-between'}>
         <div>
-          {/* Metadata Row: Category, City, Year (clean text with typographic separators, NO pills) */}
+          {/* Metadata Row: Category, City, Year */}
           <div className="flex flex-wrap items-center gap-x-2 text-xs text-[#2B2B2B] font-sans mb-2.5">
             <span className="font-bold text-[#0F3D44] uppercase tracking-wider">
               {project.categories.join(' · ')}
@@ -56,11 +65,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
           {/* Titles */}
           <div className="mb-2.5">
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1F1F1F] group-hover:text-[#0F3D44] transition-colors leading-tight">
+            <h3 className="font-sans text-xl sm:text-2xl font-bold text-[#1F1F1F] group-hover:text-[#0F3D44] transition-colors leading-tight">
               {project.name}
             </h3>
             {project.chineseName && (
-              <span className="font-serif text-base sm:text-lg text-[#2B2B2B] font-medium block mt-0.5">
+              <span className="font-sans text-sm sm:text-base text-[#2B2B2B]/85 font-medium block mt-0.5">
                 {project.chineseName}
               </span>
             )}
@@ -81,7 +90,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <div className="grid grid-cols-2 gap-3 pt-3 border-t border-[#2B2B2B]/15 mb-4">
               {project.metrics.slice(0, 2).map((m, idx) => (
                 <div key={idx}>
-                  <span className="block text-lg font-serif font-bold text-[#0F3D44]">
+                  <span className="block text-lg font-sans font-bold text-[#0F3D44]">
                     {m.value}
                   </span>
                   <span className="block text-[11px] text-[#2B2B2B] font-semibold uppercase tracking-wider">
