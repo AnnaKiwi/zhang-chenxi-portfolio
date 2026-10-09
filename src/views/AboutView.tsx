@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PORTFOLIO_DATA, Project } from '../data/portfolioData';
+import { CountUpMetric } from '../components/CountUpMetric';
+import { ProjectCarousel } from '../components/ProjectCarousel';
+import { ProjectImage } from '../components/ProjectImage';
 
 interface AboutViewProps {
   onNavigateTab: (tab: 'experience' | 'work' | 'ai-skills') => void;
@@ -22,12 +25,40 @@ export const AboutView: React.FC<AboutViewProps> = ({
   // The 3 Level 01 projects in exact approved order: Jinmao Mansion -> Vanke Yinyue -> Longfor Qingyun Que
   const heroCases = projects.filter((p) => p.level === 'hero');
 
+  // Trigger Career Snapshot count-up once upon entering viewport with approved threshold
+  const [snapshotTriggered, setSnapshotTriggered] = useState(false);
+  const snapshotRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (snapshotTriggered) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setSnapshotTriggered(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.4, // Approved 0.35 to 0.5 meaningful visibility threshold
+        rootMargin: '0px 0px -40px 0px', // Ensures section is visibly into viewport before start
+      }
+    );
+
+    if (snapshotRef.current) {
+      observer.observe(snapshotRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [snapshotTriggered]);
+
   return (
     <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 space-y-12 sm:space-y-16">
-      {/* SECTION A: INTRODUCTION & PORTRAIT */}
+      {/* SECTION A: INTRODUCTION, BIOGRAPHY & SUPPORTING MODULES */}
       <section className="pt-2 sm:pt-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Personal Identity & Position */}
+          {/* Left Column: Personal Identity, Positioning, CTA, Biography, Supporting Modules */}
           <div className="lg:col-span-8 space-y-6">
             <div className="text-xs tracking-widest uppercase font-bold text-[#0F3D44]">
               <span>SINGAPORE · SINGAPORE MANAGEMENT UNIVERSITY</span>
@@ -42,14 +73,14 @@ export const AboutView: React.FC<AboutViewProps> = ({
               </p>
             </div>
 
-            {/* SECTION B: APPROVED PROFESSIONAL POSITIONING */}
+            {/* APPROVED PROFESSIONAL POSITIONING */}
             <div className="p-5 sm:p-6 bg-[#EAE5DA]/55 border-l-3 border-[#0F3D44] rounded-r-xs">
               <p className="font-sans text-base sm:text-lg text-[#1F1F1F] font-normal leading-relaxed">
                 "{profile.positioning}"
               </p>
             </div>
 
-            {/* Quick Exploration Buttons */}
+            {/* Quick Exploration CTA Buttons */}
             <div className="pt-1 flex flex-wrap items-center gap-3 text-xs font-bold tracking-wider uppercase">
               <button
                 onClick={() => onNavigateTab('work')}
@@ -75,11 +106,23 @@ export const AboutView: React.FC<AboutViewProps> = ({
                 <span aria-hidden="true">→</span>
               </button>
             </div>
+
+            {/* BIOGRAPHY */}
+            <div className="pt-2 space-y-2.5">
+              <div className="flex items-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0F3D44]">
+                <span className="font-mono">01</span>
+                <span aria-hidden="true" className="text-[#2B2B2B]/40">/</span>
+                <span>Biography</span>
+              </div>
+              <p className="font-sans text-base sm:text-lg text-[#1F1F1F] font-normal leading-relaxed">
+                {aboutStory}
+              </p>
+            </div>
           </div>
 
-          {/* Right Column: Portrait Frame + Current Academic & Location Signals */}
+          {/* Right Column: Portrait Frame + Restored Portrait Information Card */}
           <div className="lg:col-span-4 flex flex-col items-center lg:items-end">
-            <div className="w-full max-w-xs sm:max-w-sm">
+            <div className="w-full max-w-xs sm:max-w-sm sticky top-24">
               <div className="aspect-[4/5] bg-[#ECE8DF] border border-[#2B2B2B]/20 rounded-xs overflow-hidden shadow-xs relative">
                 <img
                   src={profile.portraitUrl}
@@ -88,19 +131,33 @@ export const AboutView: React.FC<AboutViewProps> = ({
                 />
               </div>
 
-              {/* Verified Status Card */}
-              <div className="mt-3 p-3 bg-white/70 border border-[#2B2B2B]/15 rounded-xs space-y-1 text-xs">
-                <div className="flex justify-between font-mono text-[#2B2B2B]">
-                  <span className="text-[#2B2B2B]/70">Location:</span>
-                  <span className="font-bold text-[#1F1F1F]">Singapore</span>
-                </div>
-                <div className="flex justify-between font-mono text-[#2B2B2B]">
-                  <span className="text-[#2B2B2B]/70">Affiliation:</span>
-                  <span className="font-bold text-[#1F1F1F]">SMU LKCSB</span>
-                </div>
-                <div className="flex justify-between font-mono text-[#2B2B2B]">
-                  <span className="text-[#2B2B2B]/70">Degree:</span>
-                  <span className="font-bold text-[#0F3D44]">MSc in Business AI</span>
+              {/* RESTORED PORTRAIT INFORMATION CARD (Directly below portrait) */}
+              <div className="mt-3 p-3.5 sm:p-4 bg-white border border-[#2B2B2B]/15 rounded-xs shadow-2xs">
+                <div className="space-y-2 text-xs font-mono">
+                  <div className="flex justify-between items-baseline gap-2">
+                    <span className="text-[#0F3D44] uppercase tracking-wider font-bold">
+                      Location:
+                    </span>
+                    <span className="text-[#1F1F1F] font-bold text-right font-mono">
+                      Singapore
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-baseline gap-2">
+                    <span className="text-[#0F3D44] uppercase tracking-wider font-bold">
+                      Affiliation:
+                    </span>
+                    <span className="text-[#1F1F1F] font-bold text-right font-mono">
+                      SMU LKCSB
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-baseline gap-2">
+                    <span className="text-[#0F3D44] uppercase tracking-wider font-bold">
+                      Degree:
+                    </span>
+                    <span className="text-[#0F3D44] font-bold text-right font-mono">
+                      MSc in Business AI
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -108,57 +165,34 @@ export const AboutView: React.FC<AboutViewProps> = ({
         </div>
       </section>
 
-      {/* SECTION C: CAREER SNAPSHOT (5 KEY FIGURES) */}
-      <section className="border-t border-b border-[#2B2B2B]/15 py-8 sm:py-10">
+      {/* SECTION B: CAREER SNAPSHOT (WITH VIEWPORT COUNT-UP ANIMATION) */}
+      <section
+        ref={snapshotRef}
+        className="border-t border-b border-[#2B2B2B]/15 py-8 sm:py-10"
+      >
         <div className="flex items-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0F3D44] mb-6">
-          <span className="font-mono">01</span>
+          <span className="font-mono">02</span>
           <span aria-hidden="true" className="text-[#2B2B2B]/40">/</span>
           <span>Career Snapshot</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-5">
           {snapshotFigures.map((fig, idx) => (
-            <div key={idx} className="flex flex-col justify-between border-l-2 border-[#0F3D44] pl-4 py-1">
-              <div>
-                <div className="flex items-baseline gap-1.5">
-                  {fig.prefix && (
-                    <span className="text-xs sm:text-sm font-mono font-bold text-[#0F3D44] uppercase tracking-wider">
-                      {fig.prefix}
-                    </span>
-                  )}
-                  <span className="font-sans text-4xl sm:text-5xl font-extrabold text-[#1F1F1F] tracking-tight leading-none">
-                    {fig.metric}
-                  </span>
-                  {fig.unit && (
-                    <span className="text-xs font-sans font-bold text-[#0F3D44] uppercase tracking-wider">
-                      {fig.unit}
-                    </span>
-                  )}
-                </div>
-                <p className="text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-wider text-[#2B2B2B] mt-2.5 leading-snug">
-                  {fig.detail}
-                </p>
-              </div>
-            </div>
+            <CountUpMetric
+              key={idx}
+              target={fig.target}
+              suffix={fig.suffix}
+              metric={fig.metric}
+              prefix={fig.prefix}
+              unit={fig.unit}
+              detail={fig.detail}
+              trigger={snapshotTriggered}
+            />
           ))}
         </div>
       </section>
 
-      {/* SECTION D: BIOGRAPHY */}
-      <section className="space-y-4">
-        <div className="flex items-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0F3D44] mb-2">
-          <span className="font-mono">02</span>
-          <span aria-hidden="true" className="text-[#2B2B2B]/40">/</span>
-          <span>Biography</span>
-        </div>
-        <div className="max-w-3xl">
-          <p className="font-sans text-base sm:text-lg text-[#1F1F1F] font-normal leading-relaxed">
-            {aboutStory}
-          </p>
-        </div>
-      </section>
-
-      {/* SECTION E: EDUCATION (THE THREE ACADEMIC INSTITUTIONS) */}
+      {/* SECTION C: EDUCATION (THE THREE ACADEMIC INSTITUTIONS) */}
       <section className="space-y-6">
         <div className="flex items-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0F3D44] mb-2">
           <span className="font-mono">03</span>
@@ -221,7 +255,7 @@ export const AboutView: React.FC<AboutViewProps> = ({
         </div>
       </section>
 
-      {/* FEATURED WORK PREVIEW (LEVEL 01: Jinmao -> Yinyue -> Qingyun Que) */}
+      {/* SECTION D: FEATURED WORK PREVIEW (LEVEL 01: Jinmao -> Yinyue -> Qingyun Que) */}
       <section className="space-y-6 pt-2">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#2B2B2B]/15 pb-3">
           <div>
@@ -260,6 +294,23 @@ export const AboutView: React.FC<AboutViewProps> = ({
               className="p-4 bg-white/70 border border-[#2B2B2B]/15 rounded-xs hover:border-[#0F3D44]/60 transition-all cursor-pointer flex flex-col justify-between group"
             >
               <div>
+                {/* Responsive Project Media Area near top of each Level 01 card */}
+                <div className="w-full mb-3.5 overflow-hidden rounded-xs border border-[#2B2B2B]/10 bg-[#ECE8DF]">
+                  {project.carouselImages && project.carouselImages.length > 1 ? (
+                    <ProjectCarousel
+                      images={project.carouselImages}
+                      aspectRatio="16/10"
+                      className="w-full"
+                    />
+                  ) : (
+                    <ProjectImage
+                      src={project.primaryImage}
+                      alt={project.name}
+                      aspectRatio="16/10"
+                    />
+                  )}
+                </div>
+
                 <div className="flex justify-between items-center text-[11px] font-mono text-[#0F3D44] font-bold mb-2">
                   <span>0{idx + 1} · {project.company}</span>
                   <span className="text-[#2B2B2B]/70">{project.year}</span>
@@ -296,7 +347,7 @@ export const AboutView: React.FC<AboutViewProps> = ({
         </div>
       </section>
 
-      {/* SECTION F: CONTACT ME */}
+      {/* SECTION E: CONTACT ME */}
       <section className="p-6 sm:p-8 bg-[#ECE8DF] border border-[#2B2B2B]/15 rounded-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>

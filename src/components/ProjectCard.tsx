@@ -22,7 +22,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       }`}
     >
       {/* Visual Image / Media Representation */}
-      <div className={isHero ? 'md:col-span-7' : 'w-full mb-4'}>
+      <div className={isHero ? 'w-full mb-4 md:mb-0 md:col-span-7' : 'w-full mb-4'}>
         {project.isReserved ? (
           <ProjectImage
             src=""

@@ -19,6 +19,15 @@ export interface Metric {
   value: string;
 }
 
+export interface SnapshotFigure {
+  target: number;
+  suffix?: string;
+  prefix?: string;
+  unit?: string;
+  detail: string;
+  metric?: string;
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -103,31 +112,41 @@ export const PORTFOLIO_DATA = {
 
   snapshotFigures: [
     {
-      metric: '9',
-      unit: 'years',
+      target: 9,
+      suffix: '',
+      unit: 'YEARS',
       detail: 'IN BRAND & MARKETING STRATEGY',
+      metric: '9',
     },
     {
-      metric: '4',
-      unit: 'Fortune 500',
+      target: 4,
+      suffix: '',
+      unit: 'FORTUNE 500',
       detail: 'DEVELOPERS: VANKE, CHINA JINMAO, LONGFOR, SUNAC',
+      metric: '4',
     },
     {
-      metric: '41',
-      unit: 'projects',
+      target: 41,
+      suffix: '',
+      unit: 'PROJECTS',
       detail: 'UNDER REGIONAL BRAND GOVERNANCE',
+      metric: '41',
     },
     {
-      metric: '22B+',
-      prefix: 'RMB',
+      target: 22,
+      prefix: 'RMB ',
+      suffix: 'B+',
       detail: 'IN SALES SUPPORTED (2024–2025)',
+      metric: '22B+',
     },
     {
-      metric: '1B',
-      prefix: 'RMB',
+      target: 1,
+      prefix: 'RMB ',
+      suffix: 'B',
       detail: 'OPENING-DAY SALES (QINGYUN QUE LAUNCH)',
+      metric: '1B',
     },
-  ],
+  ] as SnapshotFigure[],
 
   capabilityProgression: [
     { city: 'Shenyang', capability: 'Brand & Consumer Engagement' },
@@ -551,11 +570,28 @@ export const PORTFOLIO_DATA = {
       year: '2024',
       categories: ['Launch Events'],
       level: 'additional',
-      isReserved: true,
-      reservedText: 'VISUAL CASE MATERIALS TO BE ADDED',
-      primaryImage: '',
-      allImages: [],
-      carouselImages: [],
+      primaryImage:
+        '/Images/Shenyang Vanke Yinyue Product Launch/yinyue-launch-01-hero.jpg',
+      allImages: [
+        '/Images/Shenyang Vanke Yinyue Product Launch/yinyue-launch-01-hero.jpg',
+        '/Images/Shenyang Vanke Yinyue Product Launch/yinyue-launch-02-detail.jpg',
+      ],
+      carouselImages: [
+        {
+          src: '/Images/Shenyang Vanke Yinyue Product Launch/yinyue-launch-01-hero.jpg',
+          alt: 'Shenyang Vanke Yinyue Product Launch — Flagship experiential product launch ceremony and live media choreography',
+          caption:
+            'Flagship experiential product launch ceremony and live media choreography',
+          type: 'image',
+        },
+        {
+          src: '/Images/Shenyang Vanke Yinyue Product Launch/yinyue-launch-02-detail.jpg',
+          alt: 'Shenyang Vanke Yinyue Product Launch — Experiential spatial staging and ceremonial lighting design',
+          caption:
+            'Experiential spatial staging and ceremonial lighting design',
+          type: 'image',
+        },
+      ],
       overview:
         'Experiential product launch and brand activation event for the flagship Shenyang Vanke Yinyue development, showcasing experiential spatial staging and live media choreography.',
       myRole:
@@ -564,7 +600,22 @@ export const PORTFOLIO_DATA = {
         'Focused product launch and experiential activation translating Vanke\'s flagship architectural narrative into an immersive ceremonial event.',
       execution:
         'Staged high-impact product launch event and live broadcast distribution across regional marketing channels.',
-      evidence: [],
+      evidence: [
+        {
+          caption:
+            'Flagship experiential product launch ceremony and live media choreography',
+          sourceRef: 'Portfolio PDF Page 8',
+          filename: 'yinyue-launch-01-hero.jpg',
+          src: '/Images/Shenyang Vanke Yinyue Product Launch/yinyue-launch-01-hero.jpg',
+        },
+        {
+          caption:
+            'Experiential spatial staging and ceremonial lighting design',
+          sourceRef: 'Portfolio PDF Page 8',
+          filename: 'yinyue-launch-02-detail.jpg',
+          src: '/Images/Shenyang Vanke Yinyue Product Launch/yinyue-launch-02-detail.jpg',
+        },
+      ],
     },
     {
       id: 'community-cultural-ip',

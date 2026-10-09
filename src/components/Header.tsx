@@ -30,25 +30,25 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => {
         {/* Brand / Name — Functions as link returning to About landing view */}
         <button
           onClick={() => handleNavClick('about')}
-          className="text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F3D44] cursor-pointer"
+          className="text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F3D44] cursor-pointer shrink-0"
         >
-          <span className="font-sans text-xl sm:text-2xl tracking-tight font-bold text-[#1F1F1F] group-hover:text-[#0F3D44] transition-colors block">
+          <span className="font-sans text-lg sm:text-xl md:text-xl lg:text-2xl tracking-tight font-bold text-[#1F1F1F] group-hover:text-[#0F3D44] transition-colors block">
             {PORTFOLIO_DATA.profile.name}
           </span>
-          <span className="text-[10px] tracking-widest uppercase text-[#2B2B2B]/75 font-sans font-semibold block">
+          <span className="hidden sm:block text-[9px] lg:text-[10px] tracking-widest uppercase text-[#2B2B2B]/75 font-sans font-semibold">
             Marketing Strategy × Business Analytics × AI
           </span>
         </button>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-7">
+        {/* Desktop / Tablet Navigation */}
+        <nav className="hidden md:flex items-center space-x-3 lg:space-x-5 xl:space-x-7 shrink-0">
           {navItems.map((item) => {
             const isActive = activeTab === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`text-sm tracking-wide transition-all py-1.5 relative cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0F3D44] ${
+                className={`text-xs lg:text-sm tracking-wide transition-all py-1.5 relative cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0F3D44] ${
                   isActive
                     ? 'text-[#0F3D44] font-bold'
                     : 'text-[#1F1F1F] hover:text-[#0F3D44] font-semibold'
@@ -64,15 +64,15 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => {
         </nav>
 
         {/* Actions: Download CV + LinkedIn */}
-        <div className="hidden md:flex items-center space-x-3.5">
+        <div className="hidden md:flex items-center space-x-2 lg:space-x-3.5 shrink-0">
           {/* Download CV button */}
           <a
             href={PORTFOLIO_DATA.profile.cvUrl}
             download="Zhang_Chenxi_CV.pdf"
-            className="inline-flex items-center justify-center px-4 py-2 text-xs tracking-wider uppercase font-semibold text-[#F7F4EF] bg-[#0F3D44] hover:bg-[#0F3D44]/90 transition-all rounded-xs shadow-xs focus-visible:ring-2 focus-visible:ring-[#0F3D44]"
+            className="inline-flex items-center justify-center px-2.5 py-1.5 lg:px-4 lg:py-2 text-xs tracking-wider uppercase font-semibold text-[#F7F4EF] bg-[#0F3D44] hover:bg-[#0F3D44]/90 transition-all rounded-xs shadow-xs focus-visible:ring-2 focus-visible:ring-[#0F3D44] whitespace-nowrap"
           >
             <svg
-              className="w-3.5 h-3.5 mr-1.5"
+              className="w-3.5 h-3.5 mr-1 lg:mr-1.5 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -84,7 +84,8 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => {
                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
               />
             </svg>
-            Download CV
+            <span className="hidden xl:inline">Download </span>
+            <span>CV</span>
           </a>
 
           {/* Real Functional LinkedIn Icon Anchor */}
@@ -93,9 +94,9 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onSelectTab }) => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile"
-            className="p-2 text-[#1F1F1F] hover:text-[#0F3D44] transition-colors rounded-xs hover:bg-[#2B2B2B]/5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0F3D44] cursor-pointer"
+            className="p-1.5 lg:p-2 text-[#1F1F1F] hover:text-[#0F3D44] transition-colors rounded-xs hover:bg-[#2B2B2B]/5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0F3D44] cursor-pointer shrink-0"
           >
-            <svg className="w-4.5 h-4.5 fill-current text-[#0F3D44]" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 lg:w-4.5 lg:h-4.5 fill-current text-[#0F3D44]" viewBox="0 0 24 24">
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
             </svg>
           </a>

@@ -84,6 +84,54 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
     }
   }, []);
 
+  // Attempt muted inline autoplay when a video slide becomes active
+  useEffect(() => {
+    const activeSlide = images[currentIndex];
+    const isVideo =
+      activeSlide &&
+      (activeSlide.type === 'video' ||
+        activeSlide.src.toLowerCase().endsWith('.mp4') ||
+        activeSlide.src.toLowerCase().endsWith('.m4v'));
+
+    if (isVideo) {
+      const activeVideo = videoRefs.current[currentIndex];
+      if (activeVideo) {
+        activeVideo.muted = true;
+        const playPromise = activeVideo.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsVideoPlaying(true);
+            })
+            .catch(() => {
+              // Autoplay prevented by browser policy; central play button remains visible
+              setIsVideoPlaying(false);
+            });
+        }
+      }
+    } else {
+      setIsVideoPlaying(false);
+    }
+  }, [currentIndex, images]);
+
+  const handlePlayVideo = (index: number) => {
+    const vid = videoRefs.current[index];
+    if (vid) {
+      vid.muted = false;
+      const playPromise = vid.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsVideoPlaying(true);
+          })
+          .catch(() => {
+            vid.muted = true;
+            vid.play().then(() => setIsVideoPlaying(true)).catch(() => {});
+          });
+      }
+    }
+  };
+
   const goToNext = useCallback(() => {
     // Pause any currently playing video when changing slide
     const currentVideo = videoRefs.current[currentIndex];
@@ -176,31 +224,66 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
             } ${isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'}`}
           >
             {isVideo ? (
-              <video
-                ref={(el) => {
-                  videoRefs.current[index] = el;
-                }}
-                src={slide.src}
-                poster={slide.poster}
-                controls
-                playsInline
-                preload="metadata"
-                onLoadedMetadata={(e) => handleVideoMetadata(index, e)}
-                onPlay={() => {
-                  setIsVideoPlaying(true);
-                  setIsPaused(true);
-                }}
-                onPause={() => {
-                  setIsVideoPlaying(false);
-                }}
-                onEnded={() => {
-                  setIsVideoPlaying(false);
-                }}
-                onClick={(e) => e.stopPropagation()}
-                className="w-full h-full object-contain object-center bg-black"
-              >
-                Your browser does not support the video tag.
-              </video>
+              <div className="relative w-full h-full bg-black flex items-center justify-center">
+                <video
+                  ref={(el) => {
+                    videoRefs.current[index] = el;
+                  }}
+                  src={slide.src}
+                  poster={slide.poster}
+                  autoPlay={isActive}
+                  muted
+                  controls
+                  playsInline
+                  preload="metadata"
+                  onLoadedMetadata={(e) => handleVideoMetadata(index, e)}
+                  onPlay={() => {
+                    setIsVideoPlaying(true);
+                    setIsPaused(true);
+                  }}
+                  onPause={() => {
+                    setIsVideoPlaying(false);
+                  }}
+                  onEnded={() => {
+                    setIsVideoPlaying(false);
+                    setIsPaused(false);
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full h-full object-contain object-center bg-black"
+                >
+                  Your browser does not support the video tag.
+                </video>
+
+                {/* Central Play Button Overlay (Visible when video is not actively playing) */}
+                {!isVideoPlaying && (
+                  <div
+                    className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-[1px] transition-opacity duration-300 z-15 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePlayVideo(index);
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handlePlayVideo(index);
+                      }}
+                      aria-label="Play video presentation"
+                      className="group/btn flex flex-col items-center gap-2 p-3 text-[#F7F4EF] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F3D44]"
+                    >
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#0F3D44]/95 hover:bg-[#0F3D44] text-[#F7F4EF] flex items-center justify-center shadow-xl border-2 border-white/90 transition-transform transform group-hover/btn:scale-110">
+                        <svg className="w-7 h-7 sm:w-8 sm:h-8 translate-x-0.5 fill-current" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                      <span className="px-3 py-1 bg-black/75 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#F7F4EF] rounded-full border border-white/25 font-bold shadow-sm">
+                        ▶ Play Video Evidence
+                      </span>
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
               <img
                 src={slide.src}
